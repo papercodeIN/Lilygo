@@ -17,7 +17,6 @@
 #include "esp_lcd_panel_rgb.h"
 #include "esp_lcd_panel_vendor.h"
 
-#include <Wire.h>
 #include <SPI.h>
 #include <Arduino.h>
 
@@ -60,26 +59,6 @@ XPT2046 touch(SPI, TOUCHSCREEN_CS_PIN, TOUCHSCREEN_IRQ_PIN);
 #if USE_CALIBRATION_DATA
 touch_calibration_t calibration_data[4];
 #endif
-
-void scan_iic(void) {
-    byte error, address;
-    int nDevices = 0;
-    Serial.println("Scanning for I2C devices ...");
-    for (address = 0x01; address < 0x7f; address++) {
-        Wire.beginTransmission(address);
-        error = Wire.endTransmission();
-        if (error == 0) {
-            Serial.printf("I2C device found at address 0x%02X\n", address);
-            nDevices++;
-        } else if (error != 2) {
-            Serial.printf("Error %d at address 0x%02X\n", error, address);
-        }
-    }
-    if (nDevices == 0) {
-        Serial.println("No I2C devices found");
-    }
-}
-
 
 void print_chip_info(void) {
     Serial.print("Chip: ");
