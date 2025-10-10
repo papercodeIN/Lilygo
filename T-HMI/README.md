@@ -1,4 +1,4 @@
-# Lilygo T-HMI
+<h1 align = "center">🌟Lilygo T-HMI🌟</h1>
 
 ---
 <p align="center">
@@ -16,6 +16,12 @@
     <img src="https://img.shields.io/badge/SUBSCRIBE%20ON%20YOUTUBE-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Subscribe on YouTube" style="height: 40px;">
   </a>
 </p>
+
+
+---
+
+- [Official GitHub](https://github.com/Xinyuan-LilyGO/T-HMI)
+- [Product](https://lilygo.cc/products/t-hmi)
 
 ---
 
