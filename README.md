@@ -23,8 +23,8 @@
 
 # YouTube Playlist For Lilygo Products
 
-- [T-HMI](https://www.youtube.com/playlist?list=PLxrSjjYyzaaKcEFeebqFz8opz2ZnfCc98)
-- [T4 S3](https://www.youtube.com/playlist?list=PLxrSjjYyzaaLk5dXxcTvpG-8Y8nO3NJWK)
-- [T4 V1.3](https://www.youtube.com/playlist?list=PLxrSjjYyzaaJ7l1INiPHKAxmEzhema-9E)
+- [Lilygo T-HMI](https://www.youtube.com/playlist?list=PLxrSjjYyzaaKcEFeebqFz8opz2ZnfCc98)
+- [Lilygo T4 S3](https://www.youtube.com/playlist?list=PLxrSjjYyzaaLk5dXxcTvpG-8Y8nO3NJWK)
+- [Lilygo T4 V1.3](https://www.youtube.com/playlist?list=PLxrSjjYyzaaJ7l1INiPHKAxmEzhema-9E)
 
 ---
