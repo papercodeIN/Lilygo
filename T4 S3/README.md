@@ -1,4 +1,4 @@
-# Lilygo T4 S3
+<h1 align = "center">🌟Lilygo T4 S3🌟</h1>
  
 ---
 <p align="center">
