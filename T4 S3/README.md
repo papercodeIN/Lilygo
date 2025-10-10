@@ -30,3 +30,30 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 2. ⏳️Getting Started with Lilygo T4 S3 | Arduino IDE and LVGL | Square Line Studio | ESP32 S3 Touch Screen | [Watch]
 
 ---
+
+<h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>📞 Contact Method</th>
+      <th>🔗 Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Call / WhatsApp</td>
+      <td><a href="https://wa.me/919974477759">+91-9974477759</a></td>
+    </tr>
+    <tr>
+      <td>Telegram</td>
+      <td><a href="https://t.me/fusionautomate">@fusionautomate</a></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><a href="mailto:eng.innovativ@gmail.com">eng.innovativ@gmail.com</a></td>
+    </tr>
+  </tbody>
+</table>
+
+---
