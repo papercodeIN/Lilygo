@@ -38,3 +38,30 @@ $\color{Green}\Huge{\textbf{Shorts}}$
 9. 🆓Getting Started with Lilygo T4 with Arduino IDE | ESP32 | ILI9341 LCD Display | [[Watch]](https://youtu.be/tnXAzyWMMu8)
 
 ---
+
+<h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>📞 Contact Method</th>
+      <th>🔗 Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Call / WhatsApp</td>
+      <td><a href="https://wa.me/919974477759">+91-9974477759</a></td>
+    </tr>
+    <tr>
+      <td>Telegram</td>
+      <td><a href="https://t.me/fusionautomate">@fusionautomate</a></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><a href="mailto:eng.innovativ@gmail.com">eng.innovativ@gmail.com</a></td>
+    </tr>
+  </tbody>
+</table>
+
+---
