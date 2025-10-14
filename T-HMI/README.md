@@ -39,7 +39,7 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 4. ⏳️Touchscreen GPIO Control with Lilygo T-HMI & LVGL UI | ESP32S3 | [Watch] [[Code]](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/t-hmi_led_control)
 5. ⏳️Modbus TCP Device Relay Control via Lilygo T-HMI & LVGL Dashboard  | ESP32S3 | [Watch] [Code]
 6. ⏳️Modbus Serial Device Relay Control via Lilygo T-HMI & LVGL Dashboard  | ESP32S3 | [Watch] [Code]
-7. ⏳️Touchscreen RGB Magic: Control WS2812B Neopixels with Lilygo T-HM | ESP32S3 | [Watch] [Code]
+7. ⏳️Touchscreen RGB Magic: Control WS2812B Neopixels with Lilygo T-HMI | ESP32S3 | [Watch] [Code]
 
 ---
 
