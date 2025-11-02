@@ -41,7 +41,7 @@ $\color{Green}\Huge{\textbf{Shorts}}$
 
 1. 🆓Running TFT Demo in LILYGO T-HMI ESP32S3 Display | HMI | IoT | Demo | Lilygo | IIoT | [[Watch]](https://youtube.com/shorts/9CcW0_vulEw) [Code]
 2. 🆓Unboxing LILYGO T-HMI ESP32S3 Display | IoT | IIoT | LILYGO | ESP | 2.8 Inch | HMI | Display | [[Watch]](https://youtube.com/shorts/BKtSJceH6yc)
-3. 🆓Touchscreen GPIO Control with Lilygo T-HMI & LVGL UI | ESP32S3 | [[Watch]](https://youtube.com/shorts/G9RggduKXN4) [[Code]](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/t-hmi_led_control)
+3. 🆓Touchscreen GPIO Control with Lilygo T-HMI & LVGL UI | ESP32S3 | [[Watch]](https://youtube.com/shorts/G9RggduKXN4) [[Code]](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/LVGL_Examples/T-HMI_Led_Control)
 
 $\color{Green}\Huge{\textbf{Long Videos}}$
 
