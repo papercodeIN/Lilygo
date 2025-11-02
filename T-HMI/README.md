@@ -55,6 +55,33 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 
 ---
 
+## 🎬 **YouTube Shorts – Quick Demos & Unboxings**
+
+| # | 🎥 Title | ▶️ Watch | 💾 Code |
+|---|---------|----------|---------|
+| 1 | Running TFT Demo on LILYGO T-HMI ESP32S3 Display | [Watch](https://youtube.com/shorts/9CcW0_vulEw) | — |
+| 2 | Unboxing LILYGO T-HMI ESP32S3 Display | [Watch](https://youtube.com/shorts/BKtSJceH6yc) | — |
+| 3 | Touchscreen GPIO Control with LVGL UI | [Watch](https://youtube.com/shorts/G9RggduKXN4) | [Code](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/t-hmi_led_control) |
+
+---
+
+## 📺 **Long-Form Tutorials – Full Project Walkthroughs**
+
+| # | 🎥 Title | ▶️ Watch | 💾 Code |
+|---|---------|----------|---------|
+| 1 | Getting Started with LILYGO T-HMI + Arduino IDE (TFT & Power-On Demo) | [Watch](https://youtu.be/lspoB5OtbuI) | — |
+| 2 | Analogue Meter Example | [Watch](https://youtu.be/BZeGNBP6ork) | [Code](https://github.com/papercodeIN/Lilygo/tree/main/T-HMI/Examples/Analogue_Meter_Example) |
+| 3 | Colour Test Example | [Watch](https://youtu.be/8henVYCI218) | [Code](https://github.com/papercodeIN/Lilygo/tree/main/T-HMI/Examples/Colour_Test_Example) |
+| 4 | Touchscreen GPIO Control with LVGL UI | ⏳ Coming Soon | [Code](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/t-hmi_led_control) |
+| 5 | Modbus TCP Relay Control via LVGL Dashboard | ⏳ Coming Soon | — |
+| 6 | Modbus Serial Relay Control via LVGL Dashboard | ⏳ Coming Soon | — |
+| 7 | RGB Magic: Control WS2812B Neopixels via Touchscreen | ⏳ Coming Soon | — |
+
+---
+
+
+
+
 <h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
 
 <table align="center">
