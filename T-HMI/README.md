@@ -35,6 +35,22 @@
 | TFT_eSPI       | 2.5.43    |
 | ESP32 Core     | V2.0.17   |
 
+| Setting                  | Value                            |
+| :----------------------- | :------------------------------- |
+| Board                    | ESP32 S3 Dev Module              |
+| USB CDC On Boot          | Enabled                          |
+| CPU Frequency            | 240MHz (WiFi)                    |
+| Core Debug Level         | None                             |
+| USB DFU On Boot          | Enabled                          |
+| Events Run On            | Core 1                           |
+| Flash Mode               | QIO 80MHz                        |
+| Flash Size               | 16MB (128Mb)                     |
+| JTAG Adapter             | Integrated USB JTAG              |
+| Arduino Runs On          | Core 1                           |
+| USB Firmware MSC On Boot | Disabled                         |
+| Partition Scheme         | Huge APP (3MB No OTA/1MB SPIFFS) |
+| PSRAM                    | OPI PSRAM                        |
+| USB Mode                 | Hardware CDC and JTAG            |
 ---
 
 ## 🎬 **YouTube Shorts – Quick Demos & Unboxings**
