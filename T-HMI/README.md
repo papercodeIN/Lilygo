@@ -72,7 +72,7 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 | 1 | Getting Started with LILYGO T-HMI + Arduino IDE (TFT & Power-On Demo) | [Watch](https://youtu.be/lspoB5OtbuI) | — |
 | 2 | Analogue Meter Example | [Watch](https://youtu.be/BZeGNBP6ork) | [Code](https://github.com/papercodeIN/Lilygo/tree/main/T-HMI/Examples/Analogue_Meter_Example) |
 | 3 | Colour Test Example | [Watch](https://youtu.be/8henVYCI218) | [Code](https://github.com/papercodeIN/Lilygo/tree/main/T-HMI/Examples/Colour_Test_Example) |
-| 4 | Touchscreen GPIO Control with LVGL UI | ⏳ Coming Soon | [Code](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/t-hmi_led_control) |
+| 4 | Touchscreen GPIO Control with LVGL UI | ⏳ Coming Soon | [Code](https://github.com/Xinyuan-LilyGO/T-HMI/tree/master/examples/LVGL_Examples/T-HMI_Led_Control) |
 | 5 | Modbus TCP Relay Control via LVGL Dashboard | ⏳ Coming Soon | — |
 | 6 | Modbus Serial Relay Control via LVGL Dashboard | ⏳ Coming Soon | — |
 | 7 | RGB Magic: Control WS2812B Neopixels via Touchscreen | ⏳ Coming Soon | — |
