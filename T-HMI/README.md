@@ -25,6 +25,18 @@
 
 ---
 
+## 🚀 Tested Configuration
+
+| Component       | Version   |
+|----------------|-----------|
+| LVGL           | V8.3.5    |
+| lv_example     | V8.1.0    |
+| TFT_eWidget    | V0.0.5    |
+| TFT_eSPI       | 2.5.43    |
+| ESP32 Core     | V2.0.17   |
+
+---
+
 $\color{Green}\Huge{\textbf{Shorts}}$
 
 1. 🆓Running TFT Demo in LILYGO T-HMI ESP32S3 Display | HMI | IoT | Demo | Lilygo | IIoT | [[Watch]](https://youtube.com/shorts/9CcW0_vulEw) [Code]
