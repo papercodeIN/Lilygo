@@ -95,4 +95,3 @@ ESP32_NAS/
 ![ESP32 NAS on the LILYGO T4 V1.3 board](images/nas_photo.jpg)
 
 The photo shows the T4 running the NAS network and microSD status screen. The displayed IP address is a private LAN address and varies by network.
-
