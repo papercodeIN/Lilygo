@@ -23,7 +23,7 @@
 
 // touch screen
 #define TOUCHSCREEN_SCLK_PIN (1)
-#define TOUCHSCREEN_MISO_PIN (4)
+#define TOUCHSCREEN_MISO_PIN (4)  
 #define TOUCHSCREEN_MOSI_PIN (3)
 #define TOUCHSCREEN_CS_PIN   (2)
 #define TOUCHSCREEN_IRQ_PIN  (9)
