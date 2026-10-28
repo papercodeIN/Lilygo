@@ -31,6 +31,14 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 
 ---
 
+## Projects
+
+| Project | Description |
+|---|---|
+| [Bluetooth MP3 Player](<Project/Bluetooth_MP3_Player/README.md>) | Touch-controlled MP3 player — scans and streams to any Bluetooth headphone/speaker through a tiny ESP32 A2DP bridge dongle. ⚠️ Work in progress — not yet hardware-tested |
+
+---
+
 <h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
 
 <table align="center">

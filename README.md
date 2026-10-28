@@ -43,6 +43,12 @@ LVGL touchscreen examples — each folder is self-contained with wiring notes an
 | [ESP32 NAS](<T4 V1.3/Project/ESP32_NAS/README.md>) | Network-attached storage with LCD status screen and browser file manager |
 | [Digital Clock](<T4 V1.3/Project/Digital_Clock/Digital_Clock.ino>) | Standalone clock sketch for the T4 display |
 
+### T4 S3 — ESP32-S3 with 2.41-inch AMOLED ([product](https://lilygo.cc/products/t4-s3) · [official GitHub](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series))
+
+| Project | Description |
+|---|---|
+| [Bluetooth MP3 Player](<T4 S3/Project/Bluetooth_MP3_Player/README.md>) | Touch-controlled MP3 player — scans and streams to any Bluetooth headphone/speaker through a tiny ESP32 A2DP bridge dongle. ⚠️ Work in progress — not yet hardware-tested |
+
 ### Board references
 
 | Board | Contents |
