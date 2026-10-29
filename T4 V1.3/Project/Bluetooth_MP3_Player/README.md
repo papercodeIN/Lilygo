@@ -13,7 +13,7 @@ be added to this folder soon.*
 
 ## Features
 
-- LVGL 8 UI (240×320 portrait), dark tech theme with a live Bluetooth status
+- LVGL 8 UI (240×320 portrait), light theme with a live Bluetooth status
   bar on every screen: device picker (boot default), now playing, home dashboard
 - Plays .mp3 files from the microSD card (recursive scan, up to 128 tracks)
 - Bluetooth A2DP **source**: boots straight into the on-screen device picker

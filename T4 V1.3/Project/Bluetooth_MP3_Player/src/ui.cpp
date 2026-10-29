@@ -1,9 +1,9 @@
 /*
  * ui.cpp — LVGL 8 UI for the LilyGO T4 V1.3 (ILI9341 240x320 portrait).
  *
- * Look: dark tech theme — near-black background, cyan accent, rounded
- * panels, and a status bar on every screen that mirrors the Bluetooth
- * link state live.
+ * Look: light theme — soft gray-blue background, white panels, blue
+ * accent, rounded panels, and a status bar on every screen that mirrors
+ * the Bluetooth link state live.
  *
  * Screens:
  *   1. Bluetooth picker (boot default): discovered devices; left = cursor
@@ -44,19 +44,20 @@ static Playlist *uiPlaylist = nullptr;
 void invalidateNowPlaying();
 
 // ---------------------------------------------------------------------------
-// Theme
+// Theme (light)
 // ---------------------------------------------------------------------------
-#define COL_BG       0x0A0E14
-#define COL_PANEL    0x111823
-#define COL_PANEL2   0x182230
-#define COL_ACCENT   0x00D0FF
-#define COL_ACCENT2  0x00E68C
-#define COL_WARN     0xFFC94D
-#define COL_TEXT     0xE6EDF5
-#define COL_MUTED    0x7C8AA0
-#define COL_ROW      0x141D29
-#define COL_ROW_SEL  0x0C3B54
-#define COL_CHIP_TXT 0x052330
+#define COL_BG       0xE9EEF5
+#define COL_PANEL    0xFFFFFF
+#define COL_PANEL2   0xCBD8E6
+#define COL_ACCENT   0x0A6CFF
+#define COL_ACCENT2  0x0B9E58
+#define COL_WARN     0xE68A00
+#define COL_TEXT     0x1A2430
+#define COL_MUTED    0x66738A
+#define COL_ROW      0xFFFFFF
+#define COL_ROW_SEL  0xD7E8FF
+#define COL_CHIP_TXT 0xFFFFFF
+#define COL_RAY_DIM  0xD3DDE9
 
 static void stylePanel(lv_obj_t *obj, uint32_t bg)
 {
@@ -452,7 +453,7 @@ static void drawSunburst(lv_obj_t *parent, lv_coord_t cx, lv_coord_t cy)
 
         lv_obj_t *ln = lv_line_create(parent);
         lv_line_set_points(ln, pts[i], 2);
-        lv_obj_set_style_line_color(ln, lv_color_hex(i % 2 == 0 ? COL_ACCENT : 0x24313F), 0);
+        lv_obj_set_style_line_color(ln, lv_color_hex(i % 2 == 0 ? COL_ACCENT : COL_RAY_DIM), 0);
         lv_obj_set_style_line_width(ln, 2, 0);
     }
 }
@@ -919,7 +920,7 @@ void uiInit(Playlist *pl)
     // (backlight on, controller never initialised).
     tft.init();
     tft.setRotation(0); // native portrait 240x320
-    tft.fillScreen(TFT_BLACK);
+    tft.fillScreen(TFT_WHITE);
 
     lv_init(); // tick comes from millis() via lv_conf.h LV_TICK_CUSTOM
     lv_disp_draw_buf_init(&drawBuf, drawBufMem, NULL, DRAW_BUF_PX);
