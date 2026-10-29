@@ -46,13 +46,44 @@ prev/next, seek bar, volume) — all by touch.
 ## Why there is a second chip
 
 **The T4-S3's ESP32-S3 chip cannot talk to Bluetooth headphones on its own —
-this is silicon, not software.**
+this is silicon, not software. No firmware change, library, or setting can
+fix it.** Verified against Espressif's own documentation and source code:
 
 | Capability | ESP32-S3 (T4-S3) | Needs for headphones |
 |---|---|---|
 | Bluetooth Classic (BR/EDR) | ❌ not present | **A2DP** — the protocol *every* BT headphone/speaker speaks |
 | Bluetooth LE | ✅ | — |
 | LE Audio (LC3 over CIS) | ❌ controller has no ISO channels; Espressif confirmed S3 will never support it | future headphones only |
+
+**Proof from Espressif (checked 2026-10):**
+
+| # | Evidence | Source | What it proves |
+|---|---|---|---|
+| 1 | Official chip page | [espressif.com/en/products/socs/esp32-s3](https://www.espressif.com/en/products/socs/esp32-s3) | Radio is "**Bluetooth 5 (LE)**" only — Bluetooth Classic (BR/EDR) is never mentioned, because it does not exist on this chip |
+| 2 | ESP-IDF capability header for the S3 | `components/soc/esp32s3/include/soc/soc_caps.h` | Only BLE macros defined (`SOC_BLE_SUPPORTED`, `SOC_BLE_50_SUPPORTED`…). **No `SOC_BT_CLASSIC_SUPPORTED`, no `SOC_BLE_ISO_SUPPORTED`, no `SOC_BLE_AUDIO_SUPPORTED`** |
+| 3 | Same header for the original ESP32 | `components/soc/esp32/include/soc/soc_caps.h` | **Has `SOC_BT_CLASSIC_SUPPORTED (1)`** — exactly the hardware A2DP needs |
+| 4 | LE Audio support matrix | ESP-IDF "BLE overview" docs; [esp-idf issue #12277](https://github.com/espressif/esp-idf/issues/12277) | `ESP-BLE-ISO` / `ESP-BLE-AUDIO`: only ESP32-H4/S31 = "Y"; **ESP32-S3 = "–"** — Espressif staff confirmed the S3 will never get LE Audio |
+
+**Why a device scan finds nothing without the dongle:**
+
+1. The on-screen device list is filled by the **bridge dongle** doing a
+   Bluetooth **Classic** scan and forwarding results over UART. With no
+   dongle attached, the UI shows *"Bridge dongle not connected"* and lists no
+   devices — designed behavior, not a failure.
+2. A scan made with the T4-S3's own radio is a **BLE** scan. Headphones and
+   speakers advertise on **Bluetooth Classic** (A2DP), a protocol the S3's
+   radio does not have — so they can never appear in the list.
+3. LE Audio (the BLE-based successor) is equally impossible: the S3's
+   controller has **no ISO channels**, which LE Audio requires.
+
+**What actually works:**
+
+- **The bridge dongle, as designed** — any classic-ESP32 dev board (~$3–4),
+  4 Dupont wires. Its radio has Bluetooth Classic, so the scan finds every
+  headphone/speaker and the T4-S3 touchscreen does the selecting.
+- **A single-board solution** — only a chip with Bluetooth Classic can do it
+  directly: the original ESP32 (this is why the TTGO T4 V1.3 player streams
+  with no dongle), or the newer ESP32-S31.
 
 So this project puts the entire player (UI, SD, MP3 decoding, battery,
 volume, AVRCP) on the T4-S3 and adds a **$3–5 companion dongle** (any classic
