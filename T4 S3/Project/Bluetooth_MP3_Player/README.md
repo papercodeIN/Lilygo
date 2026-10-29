@@ -1,10 +1,12 @@
 # Bluetooth MP3 Player — LilyGo T4-S3
 
-> ### ⚠️ WORK IN PROGRESS — NOT YET TESTED ON HARDWARE
-> Both firmwares **compile cleanly**, but they have **not yet been flashed or
-> verified on real boards**. This project is in build mode — flash it and try
-> it **at your own risk**. If something does not work, open an issue or check
-> the [Troubleshooting](#troubleshooting) section below.
+> ### ⚠️ BUILD-VERIFIED, NOT YET TESTED ON HARDWARE
+> Both firmwares compile cleanly from a **fresh PlatformIO build**
+> (espressif32 @ 6.12.0, LVGL 8.4.0, ESP32-A2DP @ 1.8.11 — verified 2026-10),
+> but they have **not yet been flashed or verified on real boards**. This
+> project is in build mode — flash it and try it **at your own risk**. If
+> something does not work, open an issue or check the
+> [Troubleshooting](#troubleshooting) section below.
 
 A touch-driven MP3 player for the LilyGo T4-S3 (2.41" AMOLED): browse the SD
 card, **scan nearby Bluetooth headphones / speakers on screen, tap to

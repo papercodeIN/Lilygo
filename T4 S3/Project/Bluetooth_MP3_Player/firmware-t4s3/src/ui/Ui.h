@@ -31,7 +31,6 @@ public:
     void begin();
 
     // ---- screen navigation ----
-    void showDevices();                 // no anim (initial)
     void showPlayer();                  // slide left
     void backToDevices();               // slide right
 
@@ -66,6 +65,7 @@ private:
     static void cbPrev(lv_event_t *e);
     static void cbSeek(lv_event_t *e);
     static void cbSeekStart(lv_event_t *e);
+    static void cbSeekLost(lv_event_t *e);
     static void cbVolume(lv_event_t *e);
 
     // battery widgets, one set per status bar
@@ -104,10 +104,9 @@ private:
     // local UI state
     int devCount = 0;
     int connectingIdx = -1;
-    bool playing = false;
     bool sliderDragging = false;
     bool pulseRunning = false;
     uint32_t lastDurationMs = 0;
-
-    friend class AppClass;  // App drives everything through the public API
+    char lastStatusText[64] = {0};
+    bool lastSpinnerOn = false;
 };

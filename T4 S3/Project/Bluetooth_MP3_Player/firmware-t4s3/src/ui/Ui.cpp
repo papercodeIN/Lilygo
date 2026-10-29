@@ -63,13 +63,18 @@ void Ui::cbPrev(lv_event_t *e) {
 }
 void Ui::cbSeek(lv_event_t *e) {
     lv_obj_t *s = (lv_obj_t *)lv_event_get_target(e);
-    if (g_ui && g_ui->onSeekMs && g_ui->lastDurationMs > 0) {
+    if (!g_ui) return;
+    g_ui->sliderDragging = false;  // resume progress updates even if seek was a no-op
+    if (g_ui->onSeekMs && g_ui->lastDurationMs > 0) {
         uint32_t frac = (uint32_t)lv_slider_get_value(s);
         g_ui->onSeekMs((uint32_t)((uint64_t)frac * g_ui->lastDurationMs / 1000));
     }
 }
 void Ui::cbSeekStart(lv_event_t *e) {
-    g_ui->sliderDragging = true;
+    if (g_ui) g_ui->sliderDragging = true;
+}
+void Ui::cbSeekLost(lv_event_t *e) {
+    if (g_ui) g_ui->sliderDragging = false;  // drag cancelled (finger slid off)
 }
 void Ui::cbVolume(lv_event_t *e) {
     lv_obj_t *s = (lv_obj_t *)lv_event_get_target(e);
@@ -338,6 +343,7 @@ void Ui::buildPlayerScreen() {
     lv_obj_align(plSlider, LV_ALIGN_TOP_MID, 0, 448);
     lv_obj_add_event_cb(plSlider, cbSeekStart, LV_EVENT_PRESSING, nullptr);
     lv_obj_add_event_cb(plSlider, cbSeek, LV_EVENT_RELEASED, nullptr);
+    lv_obj_add_event_cb(plSlider, cbSeekLost, LV_EVENT_PRESS_LOST, nullptr);
 
     // transport
     plPlayBtn = circleBtn(scrPlayer, 84, Accent, LV_SYMBOL_PLAY, F32, 0xFFFFFF);
@@ -371,7 +377,6 @@ void Ui::buildPlayerScreen() {
 // -----------------------------------------------------------------------------
 // navigation
 // -----------------------------------------------------------------------------
-void Ui::showDevices() { lv_scr_load_anim(scrDevices, LV_SCR_LOAD_ANIM_NONE, 0, 0, false); }
 void Ui::showPlayer() { lv_scr_load_anim(scrPlayer, LV_SCR_LOAD_ANIM_MOVE_LEFT, 260, 0, false); }
 void Ui::backToDevices() { lv_scr_load_anim(scrDevices, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 260, 0, false); }
 
@@ -390,9 +395,18 @@ void Ui::setBridgeAlive(bool up) {
 }
 
 void Ui::setScanStatus(const char *text, bool spinnerOn) {
-    lv_label_set_text(devStatusLabel, text);
-    if (spinnerOn) lv_obj_clear_flag(devSpinner, LV_OBJ_FLAG_HIDDEN);
-    else lv_obj_add_flag(devSpinner, LV_OBJ_FLAG_HIDDEN);
+    // App polls every 100 ms with unchanged text - skip redundant LVGL work
+    if (!text) text = "";
+    if (strcmp(text, lastStatusText) != 0) {
+        strncpy(lastStatusText, text, sizeof(lastStatusText) - 1);
+        lastStatusText[sizeof(lastStatusText) - 1] = 0;
+        lv_label_set_text(devStatusLabel, lastStatusText);
+    }
+    if (spinnerOn != lastSpinnerOn) {
+        lastSpinnerOn = spinnerOn;
+        if (spinnerOn) lv_obj_clear_flag(devSpinner, LV_OBJ_FLAG_HIDDEN);
+        else lv_obj_add_flag(devSpinner, LV_OBJ_FLAG_HIDDEN);
+    }
 }
 
 void Ui::refreshDeviceList(const std::vector<BridgeScanItem> &items, int connecting) {
@@ -466,9 +480,14 @@ void Ui::setProgress(uint32_t elapsedMs, uint32_t durationMs) {
 }
 
 void Ui::setPlayState(bool isPlaying) {
-    playing = isPlaying;
     if (plPlayIcon) lv_label_set_text(plPlayIcon, isPlaying ? LV_SYMBOL_PAUSE : LV_SYMBOL_PLAY);
     animPulse(plArtSymbol, isPlaying);
+}
+
+// Properly typed opacity animation callback. Casting lv_obj_set_style_opa
+// directly to lv_anim_exec_xcb_t leaves the style-selector argument undefined.
+static void anim_opa_cb(void *var, int32_t v) {
+    lv_obj_set_style_opa((lv_obj_t *)var, (lv_opa_t)v, 0);
 }
 
 void Ui::animPulse(lv_obj_t *obj, bool on) {
@@ -476,7 +495,7 @@ void Ui::animPulse(lv_obj_t *obj, bool on) {
         lv_anim_t a;
         lv_anim_init(&a);
         lv_anim_set_var(&a, obj);
-        lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_obj_set_style_opa);
+        lv_anim_set_exec_cb(&a, anim_opa_cb);
         lv_anim_set_values(&a, LV_OPA_40, LV_OPA_COVER);
         lv_anim_set_time(&a, 900);
         lv_anim_set_playback_time(&a, 900);
@@ -484,7 +503,7 @@ void Ui::animPulse(lv_obj_t *obj, bool on) {
         lv_anim_start(&a);
         pulseRunning = true;
     } else if (!on && pulseRunning) {
-        lv_anim_del(obj, (lv_anim_exec_xcb_t)lv_obj_set_style_opa);
+        lv_anim_del(obj, anim_opa_cb);
         lv_obj_set_style_opa(obj, LV_OPA_COVER, 0);
         pulseRunning = false;
     }

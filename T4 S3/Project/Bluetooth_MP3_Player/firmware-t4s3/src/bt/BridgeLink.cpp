@@ -6,11 +6,9 @@ BrpParser BridgeLink::parser;
 SemaphoreHandle_t BridgeLink::writeMutex = nullptr;
 
 volatile bool BridgeLink::alive = false;
-volatile bool BridgeLink::connected = false;
 uint32_t BridgeLink::lastPingMs = 0;
 uint32_t BridgeLink::lastPongMs = 0;
 uint32_t BridgeLink::pingSeq = 0;
-uint32_t BridgeLink::pongMisses = 0;
 
 void (*BridgeLink::scanItemCb)(const BridgeScanItem &) = nullptr;
 void (*BridgeLink::scanDoneCb)() = nullptr;
@@ -39,8 +37,6 @@ void BridgeLink::poll() {
         sendPing();
         if (alive && (now - lastPongMs > (uint32_t)BRIDGE_PING_PERIOD_MS * BRIDGE_PING_MISSES)) {
             alive = false;
-            connected = false;
-            pongMisses = 0;
             if (aliveCb) aliveCb(false);
         }
     }
@@ -49,16 +45,12 @@ void BridgeLink::poll() {
 void BridgeLink::handleFrame() {
     switch (parser.type) {
         case BRP_EVT_PONG: {
-            if (parser.payloadLen < 5) break;
+            if (parser.payloadLen < 5) break;  // seq + link state
             lastPongMs = millis();
-            pongMisses = 0;
             if (!alive) {
                 alive = true;
                 if (aliveCb) aliveCb(true);
             }
-            uint8_t state = parser.payload[4];
-            const char *name = (parser.payloadLen > 5) ? (const char *)parser.payload + 5 : "";
-            connected = (state == BRP_LINK_CONNECTED);
             break;
         }
         case BRP_EVT_SCAN_ITEM: {
@@ -66,7 +58,10 @@ void BridgeLink::handleFrame() {
             BridgeScanItem item;
             item.rssi = (int8_t)parser.payload[0];
             memcpy(item.addr, parser.payload + 1, 6);
-            item.name = String((const char *)parser.payload + 7);
+            // bounded: never assume the sender NUL-terminated the name
+            item.name = String((const char *)parser.payload + 7,
+                               strnlen((const char *)parser.payload + 7,
+                                       parser.payloadLen - 7));
             if (item.name.isEmpty()) item.name = "(unnamed)";
             if (scanItemCb) scanItemCb(item);
             break;
@@ -77,8 +72,12 @@ void BridgeLink::handleFrame() {
         case BRP_EVT_STATUS: {
             if (parser.payloadLen < 1) break;
             uint8_t state = parser.payload[0];
-            const char *name = (parser.payloadLen > 1) ? (const char *)parser.payload + 1 : "";
-            connected = (state == BRP_LINK_CONNECTED);
+            char name[64] = {0};  // bounded, always NUL-terminated
+            if (parser.payloadLen > 1) {
+                size_t n = parser.payloadLen - 1;
+                if (n > sizeof(name) - 1) n = sizeof(name) - 1;
+                strncpy(name, (const char *)parser.payload + 1, n);
+            }
             if (statusCb) statusCb(state, name);
             break;
         }
@@ -110,7 +109,6 @@ void BridgeLink::sendPing() {
 }
 
 void BridgeLink::sendScanStart() { sendCmd(BRP_CMD_SCAN_START, nullptr, 0); }
-void BridgeLink::sendScanStop() { sendCmd(BRP_CMD_SCAN_STOP, nullptr, 0); }
 
 void BridgeLink::sendConnect(const uint8_t addr[6]) { sendCmd(BRP_CMD_CONNECT, addr, 6); }
 void BridgeLink::sendDisconnect() { sendCmd(BRP_CMD_DISCONNECT, nullptr, 0); }

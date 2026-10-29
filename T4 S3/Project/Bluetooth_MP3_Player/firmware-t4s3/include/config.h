@@ -42,6 +42,7 @@
 #define PCM_RING_PREFILL        (64 * 1024)    // start pumping only after this much
 #define MP3_READ_BUF_SIZE       (8 * 1024)     // file -> decoder linear buffer
 #define PCM_FRAME_CHUNK         1200           // bytes per PCM_DATA frame on UART
+#define RS_BUF_SIZE             (26 * 1024)    // resampler workspace; worst case 8 kHz mono needs ~25.4 KB stereo out per decoded frame
 
 // Output sample format (A2DP / SBC standard rate)
 #define OUT_SAMPLE_RATE         44100

@@ -6,7 +6,6 @@
 #include <freertos/queue.h>
 #include "PcmRing.h"
 #include "Resampler.h"
-#include "libhelix-mp3/mp3common.h"
 #include "libhelix-mp3/mp3dec.h"
 #include "../Id3Parser.h"
 
@@ -43,13 +42,11 @@ enum PlayerCmdId : uint8_t {
 struct PlayerCmd {
     PlayerCmdId id;
     int32_t a;
-    int32_t b;
 };
 
 class Mp3Player {
 public:
     bool begin(const std::vector<TrackItem> *library);
-    void deinit();
 
     // ---- transport API (thread-safe) ----
     void playIndex(int index);
@@ -75,9 +72,6 @@ public:
 
     // track metadata for UI (copy under mutex)
     void currentTrack(TrackItem &out);
-
-    PlayerOutput output() const { return out; }
-    uint8_t volume() const { return volumePct; }
 
 private:
     enum State : uint8_t { ST_IDLE, ST_PLAYING };

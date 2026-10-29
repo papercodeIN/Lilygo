@@ -30,8 +30,9 @@ public:
     bool isPassthrough() const { return passthrough; }
 
     // in: interleaved s16, curCh channels. out: interleaved s16 stereo.
-    // Returns output bytes written. outCap must be >= inBytes * 4 for safety
-    // (upsampling from mono/low rates can roughly double the frame count).
+    // Returns output bytes written. outCap must cover the worst case: 8 kHz
+    // mono input upsamples ~5.5x, so a full 1152-sample decode frame needs
+    // ~25.4 KB of stereo output (see RS_BUF_SIZE in config.h).
     size_t convert(const int16_t *in, size_t inBytes, uint8_t *out, size_t outCap) {
         size_t inFrames = inBytes / (curCh * sizeof(int16_t));
         if (!inFrames || passthrough) {

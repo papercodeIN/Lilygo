@@ -31,16 +31,18 @@ static const size_t PCM_RING_SIZE = 80 * 1024;
 static volatile size_t ringHead = 0, ringTail = 0;
 static portMUX_TYPE ringMux = portMUX_INITIALIZER_UNLOCKED;
 
-static inline size_t ringUsed() {
+static inline size_t ringFree() {
     size_t h = ringHead, t = ringTail;
-    return (h >= t) ? (h - t) : (PCM_RING_SIZE - t + h);
+    size_t usedBytes = (h >= t) ? (h - t) : (PCM_RING_SIZE - t + h);
+    return PCM_RING_SIZE - 1 - usedBytes;
 }
 
 static void ringPush(const uint8_t *data, size_t len) {
-    // single-core chip: plain reads are fine; overflow drops (live audio)
+    // SPSC over volatile 32-bit indices: loop task produces, A2DP task
+    // consumes; aligned 32-bit loads/stores are atomic on Xtensa. Overflow
+    // drops (live audio).
     size_t h = ringHead, t = ringTail;
-    size_t usedBytes = (h >= t) ? (h - t) : (PCM_RING_SIZE - t + h);
-    size_t freeBytes = PCM_RING_SIZE - 1 - usedBytes;
+    size_t freeBytes = ringFree();
     if (len > freeBytes) len = freeBytes;
     if (!len) return;
     size_t contig = PCM_RING_SIZE - h;
@@ -76,7 +78,8 @@ static volatile bool pendingConnect = false; // ssid_callback should select this
 static uint8_t pendingAddr[6] = {0};
 static char lastName[40] = "(none)";
 static uint8_t volumePct = 80;               // 0..100 as sent by the T4-S3
-static uint32_t restartAtMs = 0;             // discovery watchdog
+static uint32_t restartAtMs = 0;             // fast-path discovery trigger
+static uint32_t lastDiscAttemptMs = 0;       // periodic retry backstop
 static SemaphoreHandle_t evtMutex = nullptr;
 
 static void sendEvt(uint8_t type, const void *payload, uint16_t len) {
@@ -153,12 +156,14 @@ static void onAvrcpKey(uint8_t key, bool isReleased) {
 }
 
 // ---- discovery lifecycle ----------------------------------------------------
-// The library only scans while start() runs its connect state machine, so a
-// clean end()/start() cycle is used to (re)launch discovery.
-static void restartDiscoveryCycle() {
-    a2dp.end(true);
-    delay(300);
-    a2dp.start();
+// Proven pattern from the T4 V1.3 reference project: the library does not
+// restart discovery once an inquiry round ends, and end()/start() teardown
+// cycles are heavy and fragile. Just launch the next GAP inquiry directly
+// whenever discovery is idle and nothing is connected.
+static void restartDiscovery() {
+    if (discoveryActive || linkState == BRP_LINK_CONNECTED) return;
+    lastDiscAttemptMs = millis();
+    esp_bt_gap_start_discovery(ESP_BT_INQ_MODE_GENERAL_INQUIRY, 10, 0);
 }
 
 // ---- UART command handling --------------------------------------------------
@@ -194,8 +199,13 @@ static void handleCmd() {
         }
         case BRP_CMD_DISCONNECT:
             wantScan = true;
-            setStatus(BRP_LINK_DISCONNECTED, lastName);
-            restartAtMs = millis() + 200;  // reset cycle resumes discovery
+            pendingConnect = false;
+            if (a2dp.is_connected()) {
+                a2dp.disconnect();  // DISCONNECTED event reports state + restarts discovery
+            } else {
+                setStatus(BRP_LINK_DISCONNECTED, lastName);
+                restartAtMs = millis() + 100;  // idle: resume discovery
+            }
             break;
         case BRP_CMD_VOLUME:
             if (parser.payloadLen >= 1) {
@@ -228,6 +238,7 @@ void setup() {
     linkSerial.setTxBufferSize(2048);
     linkSerial.begin(2000000, SERIAL_8N1, BRIDGE_RX_PIN, BRIDGE_TX_PIN);
 
+    Serial.printf("Free heap before BT: %u\n", (unsigned)ESP.getFreeHeap());
     a2dp.set_local_name("T4S3-Audio-Bridge");
     a2dp.set_auto_reconnect(false);
     a2dp.set_data_callback(onPcmRequest);
@@ -250,9 +261,12 @@ void loop() {
     // discovery watchdog: keep scanning whenever we are not connected
     if (restartAtMs && millis() >= restartAtMs) {
         restartAtMs = 0;
-        if (wantScan && !discoveryActive && linkState != BRP_LINK_CONNECTED) {
-            restartDiscoveryCycle();
-        }
+        restartDiscovery();
+    }
+    // backstop: if a discovery attempt ever failed silently, retry gently
+    if (wantScan && !discoveryActive && linkState != BRP_LINK_CONNECTED &&
+        millis() - lastDiscAttemptMs >= 2000) {
+        restartDiscovery();
     }
 
     delay(4);

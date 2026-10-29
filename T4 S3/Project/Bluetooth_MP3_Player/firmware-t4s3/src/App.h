@@ -56,7 +56,7 @@ private:
     static void uiSeekCb(uint32_t ms);
     static void uiVolumeCb(uint8_t v);
     void connectDevice(int listIndex);
-    void setVolume(uint8_t v, bool save);
+    void setVolume(uint8_t v);   // deferred NVS write, mirrored to UI + bridge
 
     void postToast(const char *msg);   // thread-safe -> shown by uiPoll
     void requestScreen(Screen s);      // thread-safe -> applied by uiPoll
@@ -84,9 +84,9 @@ private:
     char connectingName[40] = {0};
 
     uint8_t currentBrightness = 200;
+    uint8_t lastVolumeShown = 255;
     bool lowBatteryWarned = false;
     uint32_t lastBatteryPollMs = 0;
-    uint32_t bootMs = 0;
 };
 
 extern AppClass App;

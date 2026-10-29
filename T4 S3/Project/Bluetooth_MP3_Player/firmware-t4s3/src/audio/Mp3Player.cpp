@@ -22,7 +22,7 @@ bool Mp3Player::begin(const std::vector<TrackItem> *library) {
     }
     readBuf = (uint8_t *)malloc(MP3_READ_BUF_SIZE);
     pcmBuf = (int16_t *)malloc(1152 * 2 * sizeof(int16_t) * 2);
-    rsBuf = (uint8_t *)heap_caps_malloc(16 * 1024, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
+    rsBuf = (uint8_t *)heap_caps_malloc(RS_BUF_SIZE, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
     if (!readBuf || !pcmBuf || !rsBuf) {
         log_e("audio workspace alloc failed");
         return false;
@@ -36,45 +36,39 @@ bool Mp3Player::begin(const std::vector<TrackItem> *library) {
     return true;
 }
 
-void Mp3Player::deinit() {
-    stop();
-    if (helix) MP3FreeDecoder(helix);
-    ring.deinit();
-}
-
 // -----------------------------------------------------------------------------
 // transport API
 // -----------------------------------------------------------------------------
 void Mp3Player::playIndex(int idx) {
-    PlayerCmd c = {PCMD_PLAY_INDEX, idx, 0};
+    PlayerCmd c = {PCMD_PLAY_INDEX, idx};
     xQueueSend(cmdQueue, &c, pdMS_TO_TICKS(100));
 }
 void Mp3Player::togglePause() {
-    PlayerCmd c = {PCMD_TOGGLE_PAUSE, 0, 0};
+    PlayerCmd c = {PCMD_TOGGLE_PAUSE, 0};
     xQueueSend(cmdQueue, &c, 0);
 }
 void Mp3Player::next() {
-    PlayerCmd c = {PCMD_NEXT, 0, 0};
+    PlayerCmd c = {PCMD_NEXT, 0};
     xQueueSend(cmdQueue, &c, 0);
 }
 void Mp3Player::prev() {
-    PlayerCmd c = {PCMD_PREV, 0, 0};
+    PlayerCmd c = {PCMD_PREV, 0};
     xQueueSend(cmdQueue, &c, 0);
 }
 void Mp3Player::seekMs(uint32_t ms) {
-    PlayerCmd c = {PCMD_SEEK_MS, (int32_t)ms, 0};
+    PlayerCmd c = {PCMD_SEEK_MS, (int32_t)ms};
     xQueueSend(cmdQueue, &c, 0);
 }
 void Mp3Player::stop() {
-    PlayerCmd c = {PCMD_STOP, 0, 0};
+    PlayerCmd c = {PCMD_STOP, 0};
     xQueueSend(cmdQueue, &c, pdMS_TO_TICKS(100));
 }
 void Mp3Player::setVolume(uint8_t vol01to100) {
-    PlayerCmd c = {PCMD_SET_VOLUME, vol01to100, 0};
+    PlayerCmd c = {PCMD_SET_VOLUME, vol01to100};
     xQueueSend(cmdQueue, &c, 0);
 }
 void Mp3Player::setOutput(PlayerOutput o) {
-    PlayerCmd c = {PCMD_SET_OUTPUT, (int32_t)o, 0};
+    PlayerCmd c = {PCMD_SET_OUTPUT, (int32_t)o};
     xQueueSend(cmdQueue, &c, 0);
 }
 
@@ -340,7 +334,7 @@ void Mp3Player::pushPcm(int16_t *pcm, size_t bytes) {
         return;
     }
 
-    size_t n = resampler.convert(pcm, bytes, rsBuf, 16 * 1024);
+    size_t n = resampler.convert(pcm, bytes, rsBuf, RS_BUF_SIZE);
     if (!n) return;
     if (softVolume) {
         int32_t g = volumePct;

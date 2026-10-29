@@ -2,19 +2,24 @@
 #include "config.h"
 #include <algorithm>
 #include <LilyGo_AMOLED.h>
-#include <LV_Helper.h>
 #include <SD.h>
 #include <esp_sleep.h>
 
 AppClass App;
 static LilyGo_Class *g_amoled = nullptr;
 
+// NUL-safe, bounds-safe copy for shared name buffers
+static void copyName(char *dst, size_t cap, const char *src) {
+    if (!src) src = "";
+    strncpy(dst, src, cap - 1);
+    dst[cap - 1] = 0;
+}
+
 // =============================================================================
 // boot
 // =============================================================================
 void AppClass::begin(LilyGo_Class &device) {
     g_amoled = &device;
-    bootMs = millis();
     listMutex = xSemaphoreCreateMutex();
 
     prefs.begin("btmp3", false);
@@ -226,6 +231,12 @@ void AppClass::uiPoll() {
     }
     ui.setProgress(player.elapsedMs(), player.durationMs());
 
+    // mirror remote volume changes (AVRCP) onto the on-screen slider
+    if (volume != lastVolumeShown) {
+        lastVolumeShown = volume;
+        ui.setVolume(volume);
+    }
+
     // deferred NVS volume save (avoid flash wear while dragging)
     if (lastVolumeChangeMs && now - lastVolumeChangeMs > 2000) {
         lastVolumeChangeMs = 0;
@@ -299,7 +310,7 @@ void AppClass::handleStatus(uint8_t state, const char *name) {
     bridgeState = state;
     switch (state) {
         case BRP_LINK_CONNECTED: {
-            strncpy(connectingName, name, sizeof(connectingName) - 1);
+            copyName(connectingName, sizeof(connectingName), name);
             scanning = false;
             connectingIdx = -1;
             devicesChanged = true;
@@ -310,7 +321,7 @@ void AppClass::handleStatus(uint8_t state, const char *name) {
             break;
         }
         case BRP_LINK_CONNECTING: {
-            strncpy(connectingName, name ? name : "", sizeof(connectingName) - 1);
+            copyName(connectingName, sizeof(connectingName), name);
             break;
         }
         case BRP_LINK_DISCONNECTED: {
@@ -344,10 +355,10 @@ void AppClass::bridgeAvrcpCb(uint8_t key) {
         case BRP_AVRCP_FORWARD: App.player.next(); break;
         case BRP_AVRCP_BACKWARD: App.player.prev(); break;
         case BRP_AVRCP_VOL_UP:
-            App.setVolume(min(100, (int)App.volume + 5), true);
+            App.setVolume(min(100, (int)App.volume + 5));
             break;
         case BRP_AVRCP_VOL_DOWN:
-            App.setVolume(App.volume > 5 ? App.volume - 5 : 0, true);
+            App.setVolume(App.volume > 5 ? App.volume - 5 : 0);
             break;
         default: break;
     }
@@ -389,7 +400,7 @@ void AppClass::connectDevice(int listIndex) {
 
     App.connectingIdx = listIndex;
     App.devicesChanged = true;  // highlight the tapped row
-    strncpy(App.connectingName, target.name.c_str(), sizeof(App.connectingName) - 1);
+    copyName(App.connectingName, sizeof(App.connectingName), target.name.c_str());
     App.bridgeState = BRP_LINK_CONNECTING;
     BridgeLink::sendConnect(target.addr);
 }
@@ -419,12 +430,12 @@ void AppClass::uiNextCb() { App.player.next(); }
 void AppClass::uiPrevCb() { App.player.prev(); }
 void AppClass::uiSeekCb(uint32_t ms) { App.player.seekMs(ms); }
 
-void AppClass::uiVolumeCb(uint8_t v) { App.setVolume(v, false); }
+void AppClass::uiVolumeCb(uint8_t v) { App.setVolume(v); }
 
-void AppClass::setVolume(uint8_t v, bool deferSave) {
+void AppClass::setVolume(uint8_t v) {
     if (v > 100) v = 100;
     volume = v;
     player.setVolume(v);                 // used by the local-speaker path
     if (BridgeLink::isAlive()) BridgeLink::sendVolume(v);  // AVRCP absolute volume
-    lastVolumeChangeMs = deferSave ? 0 : millis();
+    lastVolumeChangeMs = millis();       // NVS write is deferred in uiPoll (flash-wear friendly)
 }

@@ -21,12 +21,6 @@ public:
         return true;
     }
 
-    void deinit() {
-        if (buf) free(buf);
-        buf = nullptr;
-        capacity = 0;
-    }
-
     size_t used() const {
         uint32_t h = head, t = tail;
         return (h >= t) ? (h - t) : (capacity - t + h);

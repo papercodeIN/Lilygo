@@ -23,10 +23,8 @@ public:
     static void poll();          // call from loop task, ~10 ms cadence
 
     static bool isAlive() { return alive; }
-    static bool isConnected() { return connected; }
 
     static void sendScanStart();
-    static void sendScanStop();
     static void sendConnect(const uint8_t addr[6]);
     static void sendDisconnect();
     static void sendVolume(uint8_t vol01to100);
@@ -49,11 +47,9 @@ private:
     static SemaphoreHandle_t writeMutex;
 
     static volatile bool alive;
-    static volatile bool connected;
     static uint32_t lastPingMs;
     static uint32_t lastPongMs;
     static uint32_t pingSeq;
-    static uint32_t pongMisses;
 
     static void (*scanItemCb)(const BridgeScanItem &);
     static void (*scanDoneCb)();
