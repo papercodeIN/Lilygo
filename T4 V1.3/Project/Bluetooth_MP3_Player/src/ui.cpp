@@ -1,9 +1,10 @@
 /*
  * ui.cpp — LVGL 8 UI for the LilyGO T4 V1.3 (ILI9341 240x320 portrait).
  *
- * Look: light theme — soft gray-blue background, white panels, blue
- * accent, rounded panels, and a status bar on every screen that mirrors
- * the Bluetooth link state live.
+ * Look: light theme by default (UI_THEME_LIGHT=1 in include/app_config.h;
+ * set it to 0 for the dark theme) — soft gray-blue background, white
+ * panels, blue accent, rounded panels, and a status bar on every screen
+ * that mirrors the Bluetooth link state live.
  *
  * Screens:
  *   1. Bluetooth picker (boot default): discovered devices; left = cursor
@@ -44,8 +45,12 @@ static Playlist *uiPlaylist = nullptr;
 void invalidateNowPlaying();
 
 // ---------------------------------------------------------------------------
-// Theme (light)
+// Theme — switch with UI_THEME_LIGHT in include/app_config.h (1 = light,
+// 0 = dark). Both palettes live here; the compiler keeps only the selected
+// one, so flipping the bit costs nothing at runtime.
 // ---------------------------------------------------------------------------
+#if UI_THEME_LIGHT
+
 #define COL_BG       0xE9EEF5
 #define COL_PANEL    0xFFFFFF
 #define COL_PANEL2   0xCBD8E6
@@ -58,6 +63,25 @@ void invalidateNowPlaying();
 #define COL_ROW_SEL  0xD7E8FF
 #define COL_CHIP_TXT 0xFFFFFF
 #define COL_RAY_DIM  0xD3DDE9
+#define COL_SCREEN_INIT TFT_WHITE
+
+#else
+
+#define COL_BG       0x0A0E14
+#define COL_PANEL    0x111823
+#define COL_PANEL2   0x182230
+#define COL_ACCENT   0x00D0FF
+#define COL_ACCENT2  0x00E68C
+#define COL_WARN     0xFFC94D
+#define COL_TEXT     0xE6EDF5
+#define COL_MUTED    0x7C8AA0
+#define COL_ROW      0x141D29
+#define COL_ROW_SEL  0x0C3B54
+#define COL_CHIP_TXT 0x052330
+#define COL_RAY_DIM  0x24313F
+#define COL_SCREEN_INIT TFT_BLACK
+
+#endif
 
 static void stylePanel(lv_obj_t *obj, uint32_t bg)
 {
@@ -920,7 +944,7 @@ void uiInit(Playlist *pl)
     // (backlight on, controller never initialised).
     tft.init();
     tft.setRotation(0); // native portrait 240x320
-    tft.fillScreen(TFT_WHITE);
+    tft.fillScreen(COL_SCREEN_INIT);
 
     lv_init(); // tick comes from millis() via lv_conf.h LV_TICK_CUSTOM
     lv_disp_draw_buf_init(&drawBuf, drawBufMem, NULL, DRAW_BUF_PX);

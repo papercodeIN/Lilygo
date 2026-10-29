@@ -5,16 +5,13 @@ player: MP3 files from a microSD card are decoded and streamed over
 Classic Bluetooth A2DP to any Bluetooth headphone or speaker you pick from
 the on-screen device list.
 
-![T4 V1.3 Bluetooth MP3 player in a 3D-printed case, now-playing screen connected to boAt Rockerz 510](images/case-photo.jpg)
-
-*The finished device in its 3D-printed case, streaming to boAt Rockerz 510
-headphones over Bluetooth Classic (A2DP). 3D-print files for the case will
-be added to this folder soon.*
-
 ## Features
 
 - LVGL 8 UI (240×320 portrait), light theme with a live Bluetooth status
-  bar on every screen: device picker (boot default), now playing, home dashboard
+  bar on every screen: device picker (boot default), now playing, home
+  dashboard. Prefer dark? Both palettes are built in — set `UI_THEME_LIGHT`
+  to `0` in `include/app_config.h` and re-flash (step-by-step below in
+  [Switching between the light and dark theme](#switching-between-the-light-and-dark-theme))
 - Plays .mp3 files from the microSD card (recursive scan, up to 128 tracks)
 - Bluetooth A2DP **source**: boots straight into the on-screen device picker
   and the user chooses a device every time — no automatic reconnect to
@@ -139,6 +136,37 @@ flashes, `pio device monitor` opens the serial monitor. The environment is
 `lilygo_t4_v13`; default upload speed 921600. The firmware uses ~1.6 MB of
 flash (huge_app partition table) and builds with
 `platform-espressif32@6.5.0`.
+
+## Switching between the light and dark theme
+
+The firmware ships with **both** colour schemes built in, and a single
+line in the source decides which one is compiled into the flash. No other
+file needs touching.
+
+1. Open `include/app_config.h` in any text editor (VS Code, Notepad, …).
+2. Find the theme switch roughly halfway down the file:
+
+   ```c
+   // ================= UI theme =================
+   // Single-bit theme switch: 1 = light theme (default), 0 = dark theme.
+   #define UI_THEME_LIGHT 1
+   ```
+
+3. Set the value for the theme you want and save the file:
+
+   | Value | Theme | Look |
+   | --- | --- | --- |
+   | `1` | **Light** (default) | soft gray-blue background, white panels, blue accent |
+   | `0` | **Dark** | near-black background, dark panels, cyan accent |
+
+4. Re-build and re-flash exactly as in the build guide above
+   (`pio run -t upload`, or the ✓ Build / Upload buttons in VS Code).
+
+Every screen follows the setting — device picker, now playing, home
+dashboard, the status bar and even the first background drawn at boot.
+There is no runtime cost either way: the compiler keeps only the selected
+palette, so flash and RAM usage are identical for both themes. Switching
+back later is just changing the value again and re-flashing.
 
 ## First use
 

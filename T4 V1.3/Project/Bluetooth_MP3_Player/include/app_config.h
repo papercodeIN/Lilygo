@@ -39,6 +39,12 @@
                                             // (large embedded album art needs
                                             // more than a small window)
 
+// ================= UI theme =================
+// Single-bit theme switch: 1 = light theme (default), 0 = dark theme.
+// Change the value and re-flash; the compiler keeps only the selected
+// palette, so there is no runtime cost either way.
+#define UI_THEME_LIGHT 1
+
 // ================= Behaviour =================
 #define LCD_AUTO_SLEEP_MS       180000UL    // backlight off after 3 min idle
 
