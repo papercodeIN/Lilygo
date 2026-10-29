@@ -1,11 +1,27 @@
 # Bluetooth MP3 Player — LilyGo T4-S3
 
-> ### ⚠️ BUILD-VERIFIED, NOT YET TESTED ON HARDWARE
+> ### 🛑 HARDWARE REQUIREMENT — READ BEFORE BUILDING
+> **The T4-S3 display alone cannot play Bluetooth audio.** Its ESP32-S3 chip
+> has Bluetooth *LE only* — no Bluetooth Classic — so it physically cannot
+> talk to headphones or speakers, and the board has no audio output hardware
+> at all. **Arrange the extra hardware before you start:**
+>
+> | You want | You must arrange |
+> |---|---|
+> | Bluetooth headphones / speaker | a ~$4 **classic-ESP32 dongle** (ESP32-WROOM-32 / DevKitC — *not* S3/C3) flashed with `firmware-bridge-esp32`, + 3–4 female-female Dupont wires |
+> | or a small onboard speaker | a ~$2 **MAX98357A I2S amp** + speaker, 3 wires to the header, `ENABLE_LOCAL_SPEAKER 1` in `firmware-t4s3/include/config.h` |
+>
+> Without one of these, the firmware boots correctly but shows
+> *"Bridge dongle not connected"* — that is **expected behaviour, not a
+> bug**. Details: [Why there is a second chip](#why-there-is-a-second-chip).
+
+> ### ⚠️ BUILD-VERIFIED; AUDIO PATH NOT YET TESTED ON HARDWARE
 > Both firmwares compile cleanly from a **fresh PlatformIO build**
-> (espressif32 @ 6.12.0, LVGL 8.4.0, ESP32-A2DP @ 1.8.11 — verified 2026-10),
-> but they have **not yet been flashed or verified on real boards**. This
-> project is in build mode — flash it and try it **at your own risk**. If
-> something does not work, open an issue or check the
+> (espressif32 @ 6.12.0, LVGL 8.4.0, ESP32-A2DP @ 1.8.11 — verified 2026-10).
+> The T4-S3 firmware **boots on real hardware** (UI + battery widget
+> confirmed 2026-10); the full audio path via the dongle is **still
+> untested** — flash it and try it **at your own risk**. If something does
+> not work, open an issue or check the
 > [Troubleshooting](#troubleshooting) section below.
 
 A touch-driven MP3 player for the LilyGo T4-S3 (2.41" AMOLED): browse the SD
