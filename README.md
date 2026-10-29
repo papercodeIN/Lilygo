@@ -23,7 +23,7 @@ Every example and project folder documents its hardware setup, wiring and build 
 
 ## Projects
 
-### T-HMI — ESP32-S3 4-inch HMI display ([product](https://lilygo.cc/products/t-hmi) · [official GitHub](https://github.com/Xinyuan-LilyGO/T-HMI))
+### T-HMI — ESP32-S3 2.8-inch HMI display ([product](https://lilygo.cc/products/t-hmi) · [official GitHub](https://github.com/Xinyuan-LilyGO/T-HMI))
 
 LVGL touchscreen examples — each folder is self-contained with wiring notes and build instructions ([all examples](<T-HMI/Examples/README.md>)):
 
@@ -35,6 +35,7 @@ LVGL touchscreen examples — each folder is self-contained with wiring notes an
 | [Touchscreen LED Control](<T-HMI/Examples/t-hmi_led_control/README.md>) | On-board LED control from the LVGL UI |
 | [Analogue Meter](<T-HMI/Examples/Analogue_Meter_Example/README.md>) | LVGL analogue-style gauge widget demo |
 | [Colour Test](<T-HMI/Examples/Colour_Test_Example/README.md>) | Panel uniformity and touch test pattern |
+| [Bluetooth MP3 Player — port halted](<T-HMI/Examples/Bluetooth_MP3_Player/README.md>) | 🛑 Documentation only — why the T-HMI cannot play Bluetooth audio (or any audio) without added hardware; port investigated and intentionally stopped |
 
 ### T4 V1.3 — ESP32 with 2.2-inch LCD
 

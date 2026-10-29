@@ -11,6 +11,7 @@ This folder contains example programs for the LILYGO T-HMI ESP32-S3 touchscreen 
 | `mbtcp_coil_control` | LVGL touchscreen control of Modbus TCP relay coils over Wi-Fi | Includes `platformio.ini`; see its README for a board-definition path requirement |
 | `neo_pixel_led_control` | LVGL touchscreen control of WS2812B/NeoPixel LEDs | Arduino sketch; no project-local `platformio.ini` yet |
 | `t-hmi_led_control` | LVGL touchscreen interface to operate the board's LED | Arduino sketch; no project-local `platformio.ini` yet |
+| `Bluetooth_MP3_Player` | 🛑 Investigation write-up: why a Bluetooth MP3 player is not possible on this board without added hardware (port intentionally halted) | Documentation only — no firmware |
 
 ## Before you start
 
