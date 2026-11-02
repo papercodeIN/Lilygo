@@ -1,3 +1,12 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T4_V1.3.ESP32_NAS" alt="Project visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # ESP32 NAS — LILYGO TTGO T4 V1.3
 
 PlatformIO-only port of the ESP32 NAS project for the LILYGO TTGO T4 V1.3 (2.4-inch display option). It carries over the web file manager, Wi-Fi setup portal, SD recovery, status screens, OTA, and saved Wi-Fi credentials from the Elecrow-based project while using the T4 V1.3 hardware pinout.
@@ -18,7 +27,7 @@ PlatformIO-only port of the ESP32 NAS project for the LILYGO TTGO T4 V1.3 (2.4-i
 
 ![ESP32 NAS web file manager](images/web_ui.png)
 
-The file manager provides a browser-based view of the microSD card, including storage usage, transfer status, and device network status. Example items shown include the `LOSTDIR` and `photos` folders, plus PDF documents such as `Custom G-Codes-for-FPS+and-P2S+Bambu+Lab+printers.pdf` and `Urvsh Nukum - 20-Aug-2026.pdf`.
+The file manager provides a browser-based view of the microSD card, including storage usage, transfer status, and device network status. The screenshot shows representative folders and files; names and contents will vary with the inserted card.
 
 ### Hardware photo
 
@@ -62,7 +71,7 @@ The PlatformIO environment is `lilygo_t4_v13`. Default upload speed is 921600; i
 3. Open `http://192.168.4.1`, enter home Wi-Fi details, and save.
 4. After reboot, check the serial monitor or TFT for the device IP, then visit `http://<device-ip>/`.
 
-Wi-Fi setup credentials persist in NVS. Optional first-boot defaults are already set in `PlatformIO/include/secrets.h` to the values supplied for this device. That file is ignored by git and must never be committed. To change or remove defaults, edit/delete that file or use `secrets.h.example` as a template. Saved NVS credentials take priority over the defaults.
+Wi-Fi setup credentials persist in NVS. A fresh clone does not contain `PlatformIO/include/secrets.h`: copy `PlatformIO/include/secrets.h.example` to `PlatformIO/include/secrets.h`, replace the placeholder values with your own credentials, and keep the new file uncommitted. The file is ignored by git and must never contain credentials in a commit. If saved NVS credentials already exist, they take priority over these defaults; erase the device's preferences or use the setup AP when you need to configure a different network.
 
 The web UI is embedded in firmware. `index.html` at the project root is a standalone reference/sample and is not required on the SD card.
 

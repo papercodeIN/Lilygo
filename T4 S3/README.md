@@ -1,67 +1,44 @@
-<h1 align = "center">🌟Lilygo T4 S3🌟</h1>
- 
----
-<p align="center">
-  <span style="font-size: 1.1em; color: #FFD700; font-weight: bold;">✨ Enjoying this project? Support our work! ✨</span>
-</p>
+<div align="center">
 
-<p align="center" style="margin: 15px 0;">
-  <a href="https://buymeacoffee.com/pylin" target="_blank">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 40px; width: 150px;">
-  </a>
-</p>
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T4_S3" alt="T4 S3 page visitors" height="20" />
 
-<p align="center" style="margin: 15px 0;">
-  <a href="https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw" target="_blank">
-    <img src="https://img.shields.io/badge/SUBSCRIBE%20ON%20YOUTUBE-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Subscribe on YouTube" style="height: 40px;">
-  </a>
-</p>
+# LILYGO T4-S3
+
+**ESP32-S3 development board with a 2.41-inch AMOLED touchscreen**
+
+[Official GitHub](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series) · [Product page](https://lilygo.cc/products/t4-s3)
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
 
 ---
 
-- [Official GitHub](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series)
-- [Product](https://lilygo.cc/products/t4-s3)
+## Overview
 
----
+This folder contains project notes for the LILYGO T4-S3 AMOLED board. For board-specific pins, libraries, and hardware revisions, consult the [official LILYGO repository](https://github.com/Xinyuan-LILYGO/LilyGo-AMOLED-Series) and product documentation.
 
-$\color{Green}\Huge{\textbf{Long Videos}}$
+## Project archive
 
-1. 🆓Getting Started with Lilygo T4 S3 | Arduino IDE | ESP32 S3 2.41” Touch Screen | LVGL | IoT | IIoT | [[Watch]](https://youtu.be/TQbJQTTPTHc)
-2. ⏳️Getting Started with Lilygo T4 S3 | Arduino IDE and LVGL | Square Line Studio | ESP32 S3 Touch Screen | [Watch]
-
----
-
-## Projects
-
-| Project | Description |
+| Project | Status |
 |---|---|
-| [Bluetooth MP3 Player — halted](<Project/Bluetooth_MP3_Player/README.md>) | 🛑 Development stopped — the T4-S3 cannot transmit Bluetooth audio directly; Bluetooth needs a separate Bluetooth Classic module. Wired audio would need external audio hardware and a 3.5 mm jack. The project will not be progressed. |
+| [Bluetooth MP3 Player — halted](<Project/Bluetooth_MP3_Player/README.md>) | Archived experiment; development has stopped. Bluetooth audio cannot be transmitted directly by the ESP32-S3 and would require a separate Bluetooth Classic-capable module. Wired audio needs external DAC/amplifier hardware and an output such as a speaker; a 3.5 mm jack is optional. End-to-end audio was not tested. |
 
----
+## Video guide
 
-<h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
+- [Getting started with the LILYGO T4-S3](https://youtu.be/TQbJQTTPTHc)
+- Additional Arduino IDE and LVGL tutorial — link pending
 
-<table align="center">
-  <thead>
-    <tr>
-      <th>📞 Contact Method</th>
-      <th>🔗 Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Call / WhatsApp</td>
-      <td><a href="https://wa.me/919974477759">+91-9974477759</a></td>
-    </tr>
-    <tr>
-      <td>Telegram</td>
-      <td><a href="https://t.me/fusionautomate">@fusionautomate</a></td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td><a href="mailto:eng.innovativ@gmail.com">eng.innovativ@gmail.com</a></td>
-    </tr>
-  </tbody>
-</table>
+## Resources
 
----
+- [LILYGO T4-S3 product page](https://lilygo.cc/products/t4-s3)
+- [Official AMOLED Series repository](https://github.com/Xinyuan-LILYGO/LilyGo-AMOLED-Series)
+- [Archived Bluetooth MP3 Player notes](<Project/Bluetooth_MP3_Player/README.md>)
+
+## Support and contact
+
+- [YouTube — Fusion Automate](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+- [Telegram — @fusionautomate](https://t.me/fusionautomate)
+- [WhatsApp — +91-9974477759](https://wa.me/919974477759)
+- [Email](mailto:eng.innovativ@gmail.com)

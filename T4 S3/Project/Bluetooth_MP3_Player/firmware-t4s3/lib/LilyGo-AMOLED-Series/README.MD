@@ -1,11 +1,22 @@
-<h1 align = "center">🌟LilyGO AMOLED Series🌟</h1>
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T4_S3.AMOLED_Library" alt="Library documentation visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
+<h1 align="center">LILYGO AMOLED Series — Vendored Library Reference</h1>
+
+> This is upstream documentation retained with the T4-S3 firmware. The checkout is a pruned copy of the [official library](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series); links to files not included here should be opened in the upstream repository.
 
 [![PlatformIO CI](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/actions/workflows/platformio.yml/badge.svg)](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/actions/workflows/platformio.yml)
 [![Arduino CI](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/actions/workflows/arduino_ci.yml)
 [![arduino-library-badge](https://www.ardu-badge.com/badge/LilyGo-AMOLED-Series.svg?)](https://www.ardu-badge.com/LilyGo-AMOLED-Series)
 [![PlatformIO Registry](https://badges.registry.platformio.org/packages/xinyuan-lilygo/library/LilyGo-AMOLED-Series.svg)](https://registry.platformio.org/libraries/xinyuan-lilygo/LilyGo-AMOLED-Series)
 
-<!-- **English | [中文](README_CN.MD)** -->
+This vendored copy contains only the library files required by the archived T4-S3 firmware. For the complete upstream documentation and additional assets, use the [official LilyGo-AMOLED-Series repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series).
 
 ## News
 
@@ -290,8 +301,8 @@ examples/
 
 1. Install [Arduino IDE](https://www.arduino.cc/en/software)
 2. Install [Arduino ESP32 V2.0.16 or later or latest](https://docs.espressif.com/projects/arduino-esp32/en/latest/)
-3. Download `LilyGO AMOLED Series` , move to Arduino library folder (e.g. C:\Users\YourName\Documents\Arduino\libraries)
-4. Copy all folders in [libdeps folder](./libdeps/) to Arduino library folder (e.g. C:\Users\YourName\Documents\Arduino\libraries)
+3. Download the complete `LilyGO AMOLED Series` library from the [official upstream repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series) and move it to your Arduino library folder (for example, `C:\Users\YourName\Documents\Arduino\libraries`).
+4. Install the dependencies listed in the upstream repository. The `libdeps` directory is not included in this vendored checkout.
 5. Open ArduinoIDE ,`Tools` , Make your selection according to the table below
    | Arduino IDE Setting                  | Value                             |
    | ------------------------------------ | --------------------------------- |
@@ -343,7 +354,7 @@ examples/
    5. The USB port should be fixed and will not flash again. You can click Upload.
    6. Press the **RST** button to exit download mode
 
-2. If the above is invalid, burn the [binary file](./firmware/README.MD) to check whether the hardware is normal
+2. If the above is invalid, use the firmware and recovery files from the [official upstream repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series) to check whether the hardware is normal. Those files are not included in this vendored checkout.
 3. **1.47 inches AMOLED(T-Display-AMOLED-Lite)** does not support hardware screen rotation function
 4. If you use external power supply instead of USBC, please turn off the CDC option. This is because the board will wait for USB access when it starts.
 
@@ -368,46 +379,26 @@ examples/
      - macOS: `/Users/{username}/Documents/Arduino`
      - Linux: `/home/{username}/Arduino`
 
-# 8️⃣ Resource
+# 8️⃣ Resources
 
-| Product(PinMap)               | schematic                                              | Dimensions                                        | PCB 3D                                                  | Shell                                  |
-| ----------------------------- | ------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------------- | -------------------------------------- |
-| [T-Display-AMOLED-Lite][1]    | [schematic](./schematic/T-Display_AMOLED-Lite.pdf)     | [DWG](./dimensions/T-Display-AMOLED-Lite.DWG)     | [STP](./dimensions/T-Display-AMOLED-Lite-PCB-3D.7z)     | x                                      |
-| [T-Display-S3 AMOLED][2]      | [schematic](./schematic/T-Display-S3-AMOLED-Touch.pdf) | [DWG](./dimensions/T-Display-S3-AMOLED-Touch.DWG) | [STP](./dimensions/T-Display-S3-AMOLED-Touch-PCB-3D.7z) | [STP](./shell/T-Display-S3-AMOLED.zip) |
-| [T4-S3][3]                    | [schematic](./schematic/T-Display-S3-AMOLED-Touch.pdf) | [DWG](./dimensions/T4-S3-AMOLED.dxf)              | [STP](./dimensions/T4-S3-AMOLED-PCB.7z)                 | [STP](./shell/T4-S3-AMOLED.zip)        |
-| [T-Display-S3 AMOLED Plus][4] | [schematic](./schematic/T-Display-S3-AMOLED-Plus.pdf)  | [DWG](./dimensions/T-Display-S3-AMOLED-Plus.DXF)  | [STP](./dimensions/T-Display-S3-AMOLED-Plus.7Z)         | [STP](./shell/T-Display-S3-AMOLED.zip) |
+This vendored checkout does not include the upstream schematic, mechanical drawings, shell files, firmware images, or datasheets referenced by the original library README. Use the [official LilyGO-AMOLED-Series repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series) for the complete resource set.
 
-##### T-Display-AMOLED-Lite datasheet
+- [T4-S3 product page](https://lilygo.cc/products/t4-s3)
+- [T4-S3 official repository](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series)
+- [ESP32-S3 datasheet](https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
+- [SY6970 datasheet](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/tree/master/datasheet)
+- [RM690B0 display-driver datasheet](https://github.com/Xinyuan-LilyGO/LilyGo-AMOLED-Series/tree/master/datasheet)
+- [CST226 touch-controller resources](https://github.com/lewisxhe/SensorLib/tree/master/datasheet)
 
-- [AMOLED Driver datasheet](./datasheet/SH8501B0%20DataSheet.pdf)
-- [Touchpad Driver datasheet](https://github.com/lewisxhe/SensorLib/blob/master/datasheet/CHSC5816%E8%A7%A6%E6%8E%A7%E8%8A%AF%E7%89%87%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8EV1-20221114.pdf)
-- [PMU datasheet](https://github.com/lewisxhe/XPowersLib/blob/master/datasheet/AXP2101_Datasheet_V1.0_en.pdf)
-- [Light Sensor datasheet](https://github.com/lewisxhe/SensorLib/blob/master/datasheet/CM32181A3OP.pdf)
-- [ESP32S3-R8](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-
-##### T-Display-S3 AMOLED datasheet
-
-- [ESP32S3-R8](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [AMOLED Driver datasheet](./datasheet/RM67162%20DataSheet.pdf)
-- [CST816 datasheet](./datasheet/CST816_Register.pdf)
-
-##### T4-S3 datasheet
-
-- [ESP32S3-R8](https://www.espressif.com.cn/sites/default/files/documentation/esp32-s3_datasheet_en.pdf)
-- [SY6970](./datasheet/SY6970%20Datasheet.pdf)
-- [AMOLED Driver datasheet](./datasheet/RM690B0%20DataSheet_V0.2.pdf)
-- [CST226 datasheet](<[./libdeps/SensorLib/](https://github.com/lewisxhe/SensorLib/blob/master/datasheet/%E6%B5%B7%E6%A0%8E%E5%88%9B%E8%A7%A6%E6%91%B8%E8%8A%AF%E7%89%87%E7%A7%BB%E6%A4%8D%E6%89%8B%E5%86%8C-v3.5-20220701(1).pdf)>)
-
-# 8️⃣ Depends on required libraries
+# 9️⃣ Required libraries
 
 - [XPowersLib v0.2.7](https://github.com/lewisxhe/XPowersLib)
-- [SensorLib v0.2.4](https://github.com/lewisxhe/SensorsLib)
-- [lvgl v8.x or v9.x](https://github.com/lvgl/lvgl)
+- [SensorLib v0.2.4](https://github.com/lewisxhe/SensorLib)
+- [LVGL v8.x or v9.x](https://github.com/lvgl/lvgl)
 - [AceButton v1.10.1](https://github.com/bxparks/AceButton)
-- [Adafruit_NeoPixel v1.11.0](https://github.com/adafruit/Adafruit_NeoPixel)
-- [TinyGPSPlus v1.0.3](https://github.com/mikalhart/TinyGPSPlusl)
-
-# 9️⃣. lvgl 9 Upgrade Guide
+- [Adafruit NeoPixel v1.11.0](https://github.com/adafruit/Adafruit_NeoPixel)
+- [TinyGPSPlus v1.0.3](https://github.com/mikalhart/TinyGPSPlus)
+# 🔟 LVGL 9 Upgrade Guide
 
 1. Find `LilyGo-AMOLED-Series` in the library installation directory and enter the `src` directory
 2. Rename `lv_conf.h` to `lv_conf.h.v8`

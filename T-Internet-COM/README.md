@@ -1,53 +1,36 @@
+<div align="center">
 
-<h1 align = "center">🌟lilygo T-Internet-COM🌟</h1>
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-Internet-COM" alt="T-Internet-COM page visitors" height="20" />
 
----
-<p align="center">
-  <span style="font-size: 1.1em; color: #FFD700; font-weight: bold;">✨ Enjoying this project? Support our work! ✨</span>
-</p>
+# LILYGO T-Internet-COM
 
-<p align="center" style="margin: 15px 0;">
-  <a href="https://buymeacoffee.com/pylin" target="_blank">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height: 40px; width: 150px;">
-  </a>
-</p>
+**ESP32 development board with wired Ethernet connectivity**
 
-<p align="center" style="margin: 15px 0;">
-  <a href="https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw" target="_blank">
-    <img src="https://img.shields.io/badge/SUBSCRIBE%20ON%20YOUTUBE-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Subscribe on YouTube" style="height: 40px;">
-  </a>
-</p>
+[Official GitHub](https://github.com/Xinyuan-LilyGO/T-Internet-COM) · [Product page](https://lilygo.cc/products/t-internet-com)
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
 
 ---
 
-- [Official GitHub](https://github.com/Xinyuan-LilyGO/T-Internet-COM)
-- [Product](https://lilygo.cc/products/t-internet-com)
+## Overview
 
----
+The T-Internet-COM combines an ESP32 with wired Ethernet connectivity for projects that benefit from a network connection without relying on Wi-Fi. Use the official product and repository pages for current hardware revisions, pin assignments, and library guidance.
 
-<h1 align="center">📢 Reach Out to Us for Any Queries ⤵️</h1>
+## Repository contents
 
-<table align="center">
-  <thead>
-    <tr>
-      <th>📞 Contact Method</th>
-      <th>🔗 Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Call / WhatsApp</td>
-      <td><a href="https://wa.me/919974477759">+91-9974477759</a></td>
-    </tr>
-    <tr>
-      <td>Telegram</td>
-      <td><a href="https://t.me/fusionautomate">@fusionautomate</a></td>
-    </tr>
-    <tr>
-      <td>Email</td>
-      <td><a href="mailto:eng.innovativ@gmail.com">eng.innovativ@gmail.com</a></td>
-    </tr>
-  </tbody>
-</table>
+This folder currently provides this board reference README; no board-specific project examples are tracked here yet.
 
----
+## Resources
+
+- [LILYGO T-Internet-COM product page](https://lilygo.cc/products/t-internet-com)
+- [Official T-Internet-COM GitHub repository](https://github.com/Xinyuan-LilyGO/T-Internet-COM)
+
+## Support and contact
+
+- [YouTube — Fusion Automate](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+- [Telegram — @fusionautomate](https://t.me/fusionautomate)
+- [WhatsApp — +91-9974477759](https://wa.me/919974477759)
+- [Email](mailto:eng.innovativ@gmail.com)

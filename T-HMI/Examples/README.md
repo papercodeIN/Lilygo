@@ -1,6 +1,15 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.Examples" alt="Examples page visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # T-HMI Examples
 
-This folder contains example programs for the LILYGO T-HMI ESP32-S3 touchscreen board. The projects include display tests, LVGL touch interfaces, LED control, and Modbus TCP relay control.
+This folder contains tracked example documentation and sketches for the LILYGO T-HMI ESP32-S3 touchscreen board. The examples cover display tests, LVGL touch interfaces, and LED control. The Modbus TCP project is retained only in some local working trees and is not available from a fresh repository clone.
 
 ## Projects
 
@@ -8,7 +17,7 @@ This folder contains example programs for the LILYGO T-HMI ESP32-S3 touchscreen 
 | --- | --- | --- |
 | `Analogue_Meter_Example` | Two animated analog gauges using TFT_eSPI widgets | Arduino sketch; no project-local `platformio.ini` yet |
 | `Colour_Test_Example` | Display colors, text, logo, and inversion | Arduino sketch; no project-local `platformio.ini` yet |
-| `mbtcp_coil_control` | LVGL touchscreen control of Modbus TCP relay coils over Wi-Fi | Includes `platformio.ini`; see its README for a board-definition path requirement |
+| `mbtcp_coil_control` *(not tracked)* | LVGL touchscreen control of Modbus TCP relay coils over Wi-Fi | Local working-tree project only; unavailable from a fresh clone |
 | `neo_pixel_led_control` | LVGL touchscreen control of WS2812B/NeoPixel LEDs | Arduino sketch; no project-local `platformio.ini` yet |
 | `t-hmi_led_control` | LVGL touchscreen interface to operate the board's LED | Arduino sketch; no project-local `platformio.ini` yet |
 | `Bluetooth_MP3_Player` | 🛑 Investigation write-up: why a Bluetooth MP3 player is not possible on this board without added hardware (port intentionally halted) | Documentation only — no firmware |

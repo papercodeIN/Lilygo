@@ -1,3 +1,12 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.Touchscreen_LED_Control" alt="Example visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # T-HMI Touchscreen LED Control
 
 This example uses the T-HMI touchscreen to control the LED connected to the board's LED GPIO. The LVGL screen provides short blink, long blink, blinking-pattern, and counter-reset actions.

@@ -1,3 +1,12 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.Analogue_Meter_Example" alt="Example visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # Analogue Meter Example
 
 This example displays two animated gauges labelled **Amps** and **Volts** on the LILYGO T-HMI screen. The readings are generated test values (a changing sine wave); they are not measurements from real sensors.

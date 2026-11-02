@@ -1,4 +1,15 @@
-# Bluetooth MP3 Player — LilyGo T4-S3 (development halted)
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T4_S3.Bluetooth_MP3_Player" alt="Project visitors" height="20" />
+
+# Bluetooth MP3 Player — LILYGO T4-S3
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
+> **Project status: development halted.**
 
 > ### 🛑 STATUS — NOT IN DEVELOPMENT
 > **Development has been stopped; this project will not be progressed further.**
@@ -7,9 +18,10 @@
 > 3.5 mm headphone jack.
 >
 > Audio would require additional hardware: wired audio needs an external
-> audio DAC/amplifier and a 3.5 mm jack; Bluetooth audio needs a separate
-> Bluetooth Classic module/adapter. The bridge-dongle design below is only a
-> proposed workaround, not a completed or supported solution.
+> audio DAC/amplifier and a suitable output device such as a speaker or
+> headphone jack; Bluetooth audio needs a separate Bluetooth Classic
+> module/adapter. The bridge-dongle design below is only a proposed
+> workaround, not a completed or supported solution.
 >
 > This README and the source are retained for historical reference. Firmware
 > builds and the T4-S3 UI boot were verified, but end-to-end audio was not
@@ -72,7 +84,8 @@ fix it.** Verified against Espressif's own documentation and source code:
   or adapter; the archived design describes using a classic-ESP32 dev board
   as an A2DP bridge over UART.
 - Wired audio would require external audio output hardware (a DAC/amplifier)
-  and a 3.5 mm jack. The board has no built-in headphone output.
+  and a suitable output such as a speaker or headphone jack. The board has no
+  built-in audio output.
 - A different board with Bluetooth Classic built in, such as the original
   ESP32 used by the TTGO T4 V1.3, can transmit without a separate bridge.
 
@@ -258,10 +271,12 @@ forwarded to the player via AVRCP and control the T4-S3 UI.
 
 ## Archived local-speaker experiment notes
 
-No dongle, no Bluetooth — wire a **MAX98357A** I2S amp to the header and play
-through a small speaker instead. Set `ENABLE_LOCAL_SPEAKER 1` in
-`firmware-t4s3/include/config.h`, wire BCLK←GPIO38, LRC←GPIO39, DIN←GPIO40,
-Vin←VDD3V3. An "Onboard speaker" entry appears at the top of the device list.
+These notes describe an unverified historical experiment, not a supported
+configuration. No Bluetooth dongle is needed, but external audio hardware is:
+wire a **MAX98357A** I2S amplifier and a small speaker to the header. Set
+`ENABLE_LOCAL_SPEAKER 1` in `firmware-t4s3/include/config.h`, then wire
+BCLK←GPIO38, LRC←GPIO39, DIN←GPIO40, and Vin←VDD3V3. An "Onboard speaker"
+entry was intended to appear at the top of the device list.
 
 ## Repository layout
 

@@ -1,4 +1,15 @@
-# Bluetooth MP3 Player for the T-HMI — investigated, intentionally not built
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.Bluetooth_MP3_Player" alt="Investigation visitors" height="20" />
+
+# Bluetooth MP3 Player for the LILYGO T-HMI
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
+> **Archive status: investigated and intentionally not built.**
 
 > ### 🛑 STATUS — READ FIRST
 > **This folder intentionally contains documentation only — no firmware.**
@@ -10,7 +21,7 @@
 >    stream to any Bluetooth headphone or speaker on its own — ever.
 > 2. The board has **no audio hardware at all** (no DAC, no amplifier, no
 >    speaker, no headphone jack — verified in the official schematic), so a
->    bare T-HMI cannot produce sound through *any* means.
+>    bare T-HMI cannot produce wired sound without external audio hardware.
 >
 > No firmware, library, or setting can change either fact. This README
 > preserves the complete investigation so a future attempt starts from zero

@@ -1,3 +1,12 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.Colour_Test_Example" alt="Example visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # Colour Test Example
 
 This example checks the LILYGO T-HMI display by showing its logo, colored text, and repeated display-inversion patterns. It is useful for verifying basic screen initialization and colors.

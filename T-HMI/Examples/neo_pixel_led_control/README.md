@@ -1,3 +1,12 @@
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.NeoPixel_LED_Control" alt="Example visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
 # NeoPixel LED Control
 
 This LVGL touchscreen example controls a WS2812B/NeoPixel strip connected to the LILYGO T-HMI. The screen provides RGB and brightness controls and an Apply action.

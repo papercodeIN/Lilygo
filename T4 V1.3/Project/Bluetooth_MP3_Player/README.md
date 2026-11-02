@@ -1,4 +1,13 @@
-# Bluetooth MP3 Player — LilyGO TTGO T4 V1.3 (2.4" ILI9341)
+<div align="center">
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T4_V1.3.Bluetooth_MP3_Player" alt="Project visitors" height="20" />
+
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+
+</div>
+
+# Bluetooth MP3 Player — LILYGO TTGO T4 V1.3 (2.4-inch ILI9341)
 
 PlatformIO firmware that turns the T4 V1.3 into a portable Bluetooth music
 player: MP3 files from a microSD card are decoded and streamed over
@@ -23,7 +32,6 @@ the on-screen device list.
 - Volume: holding left/right changes the speaker's volume (AVRCP absolute
   volume, 10 % steps, shown on screen); a dedicated decode task feeds a PCM
   ring buffer so the Bluetooth stack is never blocked by SD/decode work
-- Auto-next on end of track; play state survives track switching
 
 ## Button mapping
 
@@ -228,13 +236,15 @@ exist until the first successful pairing. It disappears afterwards.
 ## Notes and limitations
 
 - This board is a classic ESP32, so Bluetooth **Classic** (A2DP) is used —
-  that's what gives lossless-quality streaming to headphones/speakers.
+  the audio is streamed using the lossy SBC codec supported by the A2DP
+  profile.
 - **Audio architecture**: MP3 decoding runs in its own task (`mp3dec`,
   core 1) that fills a 16 KB internal-RAM ring buffer of decoded/resampled
   PCM; the Bluetooth stack's data callback only copies from that ring. SD
   reads and decoder work therefore can never stall the Bluetooth stack
-  (which would trip the task watchdog). Decoded frame reads are capped at
-  3072 bytes so libhelix's internal 8 KB result queue can never overflow.
+  (which would trip the task watchdog). Decoder frame reads are capped at
+  1,536 bytes (`384 * 4`) so libhelix's internal 8 KB result queue can never
+  overflow.
 - MP3 only (libhelix decoder); VBR and CBR both work. Track duration is
   read from Xing/Info headers when present, estimated from bitrate
   otherwise (64-bit math, so >75-minute tracks show correct durations).
