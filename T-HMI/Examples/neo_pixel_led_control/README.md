@@ -2,10 +2,22 @@
 
 <img src="https://visitor-badge.laobi.icu/badge?page_id=papercodeIN.Lilygo.T-HMI.NeoPixel_LED_Control" alt="Example visitors" height="20" />
 
-[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
-[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
-[![Instagram](https://img.shields.io/badge/Instagram-%40fusion__automate-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/fusion_automate)
+<p align="center">
+  <strong>Support</strong><br>
+  If these projects help you, consider supporting the channel:
+</p>
 
+<p align="center">
+  <a href="https://buymeacoffee.com/pylin" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" height="36">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw" target="_blank">
+    <img src="https://img.shields.io/badge/SUBSCRIBE%20ON%20YOUTUBE-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Subscribe on YouTube" height="36">
+  </a>
+</p>
+
+**Social and contact:** [Telegram](https://t.me/fusionautomate) | [Instagram](https://www.instagram.com/fusion_automate) | [WhatsApp](https://wa.me/919974477759) | [Email](mailto:eng.innovativ@gmail.com)
 </div>
 
 # NeoPixel LED Control
