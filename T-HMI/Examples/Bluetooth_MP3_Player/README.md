@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Support</strong><br>
-  If these projects help you, consider supporting the channel:
+  If these projects help you, connect with us on social media:
 </p>
 
 
