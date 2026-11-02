@@ -22,6 +22,7 @@
 [![Instagram](https://img.shields.io/badge/Instagram-%40fusion__automate-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/fusion_automate)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-%2B91--9974477759-25D366?logo=whatsapp&logoColor=white)](https://wa.me/919974477759)
 [![Email](https://img.shields.io/badge/Email-eng.innovativ%40gmail.com-D14836?logo=gmail&logoColor=white)](mailto:eng.innovativ@gmail.com)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/pylin)
 </div>
 
 # T-HMI Examples
