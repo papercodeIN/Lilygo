@@ -22,6 +22,10 @@ player: MP3 files from a microSD card are decoded and streamed over
 Classic Bluetooth A2DP to any Bluetooth headphone or speaker you pick from
 the on-screen device list.
 
+<p align="center">
+  <img src="images/case-photo.jpg" alt="LILYGO T4 V1.3 Bluetooth MP3 player in its blue case, showing the music player interface" width="480">
+</p>
+
 ## Features
 
 - LVGL 8 UI (240×320 portrait), light theme with a live Bluetooth status
