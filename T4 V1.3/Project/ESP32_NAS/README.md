@@ -20,9 +20,11 @@ PlatformIO-only port of the ESP32 NAS project for the LILYGO TTGO T4 V1.3 (2.4-i
 
 The file manager provides a browser-based view of the microSD card, including storage usage, transfer status, and device network status. Example items shown include the `LOSTDIR` and `photos` folders, plus PDF documents such as `Custom G-Codes-for-FPS+and-P2S+Bambu+Lab+printers.pdf` and `Urvsh Nukum - 20-Aug-2026.pdf`.
 
-### TFT status display
+### Hardware photo
 
-![LILYGO T4 NAS status screen](images/lcd_status.jpg)
+![Original LILYGO T4 V1.3 hardware running ESP32 NAS](images/nas_photo.jpg)
+
+The photo shows the T4 running the NAS network and microSD status screen. The displayed IP address is a private LAN address and varies by network.
 
 ## Hardware / pin map
 
@@ -90,8 +92,3 @@ ESP32_NAS/
 └── README.md
 ```
 
-### Hardware photo
-
-![ESP32 NAS on the LILYGO T4 V1.3 board](images/nas_photo.jpg)
-
-The photo shows the T4 running the NAS network and microSD status screen. The displayed IP address is a private LAN address and varies by network.
