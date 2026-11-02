@@ -1,33 +1,23 @@
-# Bluetooth MP3 Player — LilyGo T4-S3
+# Bluetooth MP3 Player — LilyGo T4-S3 (development halted)
 
-> ### 🛑 HARDWARE REQUIREMENT — READ BEFORE BUILDING
-> **The T4-S3 display alone cannot play Bluetooth audio.** Its ESP32-S3 chip
-> has Bluetooth *LE only* — no Bluetooth Classic — so it physically cannot
-> talk to headphones or speakers, and the board has no audio output hardware
-> at all. **Arrange the extra hardware before you start:**
+> ### 🛑 STATUS — NOT IN DEVELOPMENT
+> **Development has been stopped; this project will not be progressed further.**
+> The T4-S3's ESP32-S3 cannot transmit audio directly over Bluetooth because
+> it lacks Bluetooth Classic, and the board has no built-in audio output or
+> 3.5 mm headphone jack.
 >
-> | You want | You must arrange |
-> |---|---|
-> | Bluetooth headphones / speaker | a ~$4 **classic-ESP32 dongle** (ESP32-WROOM-32 / DevKitC — *not* S3/C3) flashed with `firmware-bridge-esp32`, + 3–4 female-female Dupont wires |
-> | or a small onboard speaker | a ~$2 **MAX98357A I2S amp** + speaker, 3 wires to the header, `ENABLE_LOCAL_SPEAKER 1` in `firmware-t4s3/include/config.h` |
+> Audio would require additional hardware: wired audio needs an external
+> audio DAC/amplifier and a 3.5 mm jack; Bluetooth audio needs a separate
+> Bluetooth Classic module/adapter. The bridge-dongle design below is only a
+> proposed workaround, not a completed or supported solution.
 >
-> Without one of these, the firmware boots correctly but shows
-> *"Bridge dongle not connected"* — that is **expected behaviour, not a
-> bug**. Details: [Why there is a second chip](#why-there-is-a-second-chip).
+> This README and the source are retained for historical reference. Firmware
+> builds and the T4-S3 UI boot were verified, but end-to-end audio was not
+> tested on hardware. This is not a work-in-progress project, and no further
+> development or audio testing is planned.
 
-> ### ⚠️ BUILD-VERIFIED; AUDIO PATH NOT YET TESTED ON HARDWARE
-> Both firmwares compile cleanly from a **fresh PlatformIO build**
-> (espressif32 @ 6.12.0, LVGL 8.4.0, ESP32-A2DP @ 1.8.11 — verified 2026-10).
-> The T4-S3 firmware **boots on real hardware** (UI + battery widget
-> confirmed 2026-10); the full audio path via the dongle is **still
-> untested** — flash it and try it **at your own risk**. If something does
-> not work, open an issue or check the
-> [Troubleshooting](#troubleshooting) section below.
-
-A touch-driven MP3 player for the LilyGo T4-S3 (2.41" AMOLED): browse the SD
-card, **scan nearby Bluetooth headphones / speakers on screen, tap to
-connect**, and control playback with a full transport UI (play/pause,
-prev/next, seek bar, volume) — all by touch.
+The material below records the original touch-driven MP3 player concept and
+its proposed external-hardware workarounds for archival reference only.
 
 ```
 ┌─────────────────────────────┐        UART 2 Mbit        ┌──────────────────────┐
@@ -43,7 +33,7 @@ prev/next, seek bar, volume) — all by touch.
 
 ---
 
-## Why there is a second chip
+## Hardware limitation: why the proposed Bluetooth design used a second chip
 
 **The T4-S3's ESP32-S3 chip cannot talk to Bluetooth headphones on its own —
 this is silicon, not software. No firmware change, library, or setting can
@@ -76,23 +66,20 @@ fix it.** Verified against Espressif's own documentation and source code:
 3. LE Audio (the BLE-based successor) is equally impossible: the S3's
    controller has **no ISO channels**, which LE Audio requires.
 
-**What actually works:**
+**Hardware workarounds considered (not developed into a supported product):**
 
-- **The bridge dongle, as designed** — any classic-ESP32 dev board (~$3–4),
-  4 Dupont wires. Its radio has Bluetooth Classic, so the scan finds every
-  headphone/speaker and the T4-S3 touchscreen does the selecting.
-- **A single-board solution** — only a chip with Bluetooth Classic can do it
-  directly: the original ESP32 (this is why the TTGO T4 V1.3 player streams
-  with no dongle), or the newer ESP32-S31.
+- Bluetooth audio would require a separate Bluetooth Classic-capable module
+  or adapter; the archived design describes using a classic-ESP32 dev board
+  as an A2DP bridge over UART.
+- Wired audio would require external audio output hardware (a DAC/amplifier)
+  and a 3.5 mm jack. The board has no built-in headphone output.
+- A different board with Bluetooth Classic built in, such as the original
+  ESP32 used by the TTGO T4 V1.3, can transmit without a separate bridge.
 
-So this project puts the entire player (UI, SD, MP3 decoding, battery,
-volume, AVRCP) on the T4-S3 and adds a **$3–5 companion dongle** (any classic
-ESP32 dev board) that acts purely as the Bluetooth radio. You scan and pick
-the device on the touchscreen; the dongle is a dumb wireless cable. Audio is
-standard A2DP/SBC, so **every Bluetooth headphone and speaker ever made
-works**.
+These are possible hardware approaches, not tested or supported solutions
+for this halted T4-S3 project.
 
-## What you need
+## Archived hardware notes (not a current build recommendation)
 
 | Item | Notes |
 |---|---|
@@ -106,7 +93,12 @@ works**.
 
 ---
 
-## Build and flash from Visual Studio Code (step by step)
+## Archived build notes (historical reference only)
+
+### Historical setup steps (provided for reference only)
+
+The following steps document the original experiment. They are not maintained
+or recommended as a working T4-S3 audio player setup.
 
 ### Step 1 — Install Visual Studio Code
 
@@ -214,7 +206,7 @@ are on, you never need to touch the dongle again.
 
 ---
 
-## Using the player (100% touch)
+## Original intended interface (not validated end to end)
 
 1. **Boot** → splash → **Bluetooth device screen**. It never reconnects to
    the last device: every boot shows a **fresh scan** of audio devices
@@ -239,7 +231,7 @@ are on, you never need to touch the dongle again.
 Headphone-side buttons (play/pause/next/prev/vol on the headset) are
 forwarded to the player via AVRCP and control the T4-S3 UI.
 
-## Troubleshooting
+## Archived troubleshooting notes (not maintained)
 
 | Symptom | Fix |
 |---|---|
@@ -260,11 +252,11 @@ forwarded to the player via AVRCP and control the T4-S3 UI.
 - SBC codec (A2DP default) — good quality, ~200 ms latency; fine for music.
 - Progress/duration for VBR files without a Xing header is estimated from
   bitrate (usually accurate to a few seconds).
-- The project is **not hardware-tested yet** — first-boot tuning may be
-  needed (scan timing, buffer sizes). Serial logs at 115200 will pinpoint
-  issues.
+- The proposed audio path was **not tested on hardware**. Development has
+  been halted; this repository does not provide a maintained or supported
+  implementation.
 
-## Optional: local speaker output
+## Archived local-speaker experiment notes
 
 No dongle, no Bluetooth — wire a **MAX98357A** I2S amp to the header and play
 through a small speaker instead. Set `ENABLE_LOCAL_SPEAKER 1` in

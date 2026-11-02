@@ -35,7 +35,7 @@ $\color{Green}\Huge{\textbf{Long Videos}}$
 
 | Project | Description |
 |---|---|
-| [Bluetooth MP3 Player](<Project/Bluetooth_MP3_Player/README.md>) | Touch-controlled MP3 player — scans and streams to any Bluetooth headphone/speaker through a tiny ESP32 A2DP bridge dongle. ⚠️ Work in progress — not yet hardware-tested |
+| [Bluetooth MP3 Player — halted](<Project/Bluetooth_MP3_Player/README.md>) | 🛑 Development stopped — the T4-S3 cannot transmit Bluetooth audio directly; Bluetooth needs a separate Bluetooth Classic module. Wired audio would need external audio hardware and a 3.5 mm jack. The project will not be progressed. |
 
 ---
 

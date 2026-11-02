@@ -63,13 +63,15 @@ second chip with Bluetooth Classic.
 
 ---
 
-## The research (done before halting — reusable if ever revisited)
+## The research (record retained for reference)
 
-### Proven architecture to port
+### Previously explored architecture (not hardware-validated)
 
-The [T4-S3 player](../../../T4%20S3/Project/Bluetooth_MP3_Player/README.md)
-already solves the "ESP32-S3 has no Bluetooth Classic" problem and its
-firmware is the port template:
+The archived [T4-S3 player](../../../T4%20S3/Project/Bluetooth_MP3_Player/README.md)
+explored a Bluetooth Classic bridge dongle to work around the ESP32-S3's
+Bluetooth limitation, but its development was halted before end-to-end audio
+was tested on hardware. It is not a verified working solution or maintained
+port template:
 
 ```
 ┌────────────────────────────┐        UART 2 Mbit         ┌──────────────────────┐
@@ -83,14 +85,13 @@ firmware is the port template:
                                                    🎧 any Bluetooth headphone/speaker
 ```
 
-- `firmware-t4s3/src/audio/` (Mp3Player, PcmRing, Resampler),
-  `src/Id3Parser.*`, `src/bt/BridgeLink.*` and `include/bridge_protocol.h`
-  are hardware-agnostic and port verbatim — the only mechanical change is
-  `SD.open(...)` → `SD_MMC.open(...)` (2 call sites).
-- `firmware-bridge-esp32/` (A2DP radio dongle) is 100 % reusable unchanged;
-  its UART pins are build flags.
-- The UI (`src/ui/`) is LVGL 8.4 and ports with a re-layout: the T-HMI runs
-  **landscape 320×240** — the same shape as the T4 V1.3 player screen.
+- The T4-S3 audio, ID3, and bridge-link modules were identified as possible
+  porting candidates; no T-HMI port was made or verified, and compatibility
+  should not be assumed from this investigation alone.
+- The `firmware-bridge-esp32/` A2DP dongle firmware build was verified, but
+  reuse with a T-HMI and end-to-end audio were not tested on hardware.
+- The T4-S3 UI uses LVGL 8.4; a T-HMI port would need a layout change for its
+  **landscape 320×240** display. No such port was implemented.
 
 ### T-HMI hardware facts verified against official sources
 
@@ -123,15 +124,16 @@ T-HMI examples:
 
 | Path | Extra hardware | Result |
 |---|---|---|
-| **Speaker edition** | ~$2 MAX98357A I2S amp + any small speaker; 4 wires: BCLK→IO15, LRC→IO16, DIN→IO17, power from Grove VDD3+GND. No second chip, no pairing. | Touch MP3 player that plays the SD card through the wired speaker. The `ENABLE_LOCAL_SPEAKER` code path already exists in the T4-S3 firmware. |
-| **Bluetooth edition** | ~$4 classic-ESP32 devkit as the A2DP bridge dongle (must be classic ESP32, *not* S3/C3), wired to Grove2 as drawn above. | The full original experience: scan → tap → stream to any Bluetooth headphone/speaker. |
+| **Speaker edition** | External I2S DAC/amplifier and speaker, wired to the T-HMI. | A possible wired-audio approach; not implemented or tested. |
+| **Bluetooth edition** | A separate Bluetooth Classic-capable A2DP module/adapter, connected to the T-HMI. | A possible Bluetooth-audio approach; not implemented or tested. |
 
-Both paths reuse the T4-S3 codebase plus the verified facts in the table
-above; the port is mostly a `main.cpp` hardware-init swap.
+These are theoretical approaches only. The archived T4-S3 code is not a
+maintained or hardware-validated port for the T-HMI, and further development
+has been halted.
 
-## Where a *working* Bluetooth MP3 player lives in this repository
+## Related Bluetooth MP3 player projects in this repository
 
-| Project | Why it works there |
+| Project | Status |
 |---|---|
 | [T4 V1.3 Bluetooth MP3 Player](../../../T4%20V1.3/Project/Bluetooth_MP3_Player/README.md) | original ESP32 has Bluetooth Classic built in — streams standalone, hardware-tested |
-| [T4-S3 Bluetooth MP3 Player](../../../T4%20S3/Project/Bluetooth_MP3_Player/README.md) | ESP32-S3 + the bridge-dongle architecture described here, build-verified |
+| [T4-S3 Bluetooth MP3 Player](../../../T4%20S3/Project/Bluetooth_MP3_Player/README.md) | Archived ESP32-S3 + bridge-dongle experiment; development halted and end-to-end audio not hardware-tested |
