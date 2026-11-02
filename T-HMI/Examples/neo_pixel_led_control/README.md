@@ -17,7 +17,11 @@
   </a>
 </p>
 
-**Social and contact:** [Telegram](https://t.me/fusionautomate) | [Instagram](https://www.instagram.com/fusion_automate) | [WhatsApp](https://wa.me/919974477759) | [Email](mailto:eng.innovativ@gmail.com)
+[![YouTube](https://img.shields.io/badge/YouTube-Fusion_Automate-FF0000?logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCKKhdFV0q8CV5vWUDfiDfTw)
+[![Telegram](https://img.shields.io/badge/Telegram-%40fusionautomate-26A5E4?logo=telegram&logoColor=white)](https://t.me/fusionautomate)
+[![Instagram](https://img.shields.io/badge/Instagram-%40fusion__automate-E4405F?logo=instagram&logoColor=white)](https://www.instagram.com/fusion_automate)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-%2B91--9974477759-25D366?logo=whatsapp&logoColor=white)](https://wa.me/919974477759)
+[![Email](https://img.shields.io/badge/Email-eng.innovativ%40gmail.com-D14836?logo=gmail&logoColor=white)](mailto:eng.innovativ@gmail.com)
 </div>
 
 # NeoPixel LED Control
