@@ -11,6 +11,7 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <cstdlib>
 
 #include "backlight.h"
 #include "config.h"
@@ -366,6 +367,12 @@ void build() {
     lv_obj_set_style_bg_opa(tileview, LV_OPA_TRANSP, 0);
     lv_obj_set_scrollbar_mode(tileview, LV_SCROLLBAR_MODE_OFF);
     lv_obj_add_event_cb(tileview, tileview_changed_event, LV_EVENT_VALUE_CHANGED, nullptr);
+    // Resolve the tileview size NOW: lv_tileview_add_tile() positions each
+    // tile at column * content-width, so the parent must have its final size
+    // before the first tile is created. (The tile constructor runs a full
+    // layout pass itself; doing it explicitly here keeps that invariant
+    // independent of internal constructor ordering.)
+    lv_obj_update_layout(tileview);
 
     for (size_t page_index = 0; page_index < PAGE_COUNT; ++page_index) {
         lv_obj_t *tile = lv_tileview_add_tile(tileview, static_cast<uint8_t>(page_index), 0, LV_DIR_HOR);
@@ -399,16 +406,30 @@ void build() {
     // inside the panel, or buttons end up invisible (and scrolling broken).
     lv_obj_update_layout(tileview);
     lv_obj_t *first_button = lv_obj_get_child(lv_obj_get_child(tiles[0], 0), 0);
+    const lv_coord_t tv_w = lv_obj_get_width(tileview);
+    const lv_coord_t tv_h = lv_obj_get_height(tileview);
+    const lv_coord_t btn_w = first_button != nullptr ? lv_obj_get_width(first_button) : 0;
+    const lv_coord_t btn_h = first_button != nullptr ? lv_obj_get_height(first_button) : 0;
     dbg::log(
         "UI layout: content %dx%d @(%d,%d) | tileview %dx%d | tile0 %dx%d @(%d,%d) | btn %dx%d",
         static_cast<int>(lv_obj_get_width(content)), static_cast<int>(lv_obj_get_height(content)),
         static_cast<int>(lv_obj_get_x(content)), static_cast<int>(lv_obj_get_y(content)),
-        static_cast<int>(lv_obj_get_width(tileview)), static_cast<int>(lv_obj_get_height(tileview)),
+        static_cast<int>(tv_w), static_cast<int>(tv_h),
         first_button != nullptr ? static_cast<int>(lv_obj_get_width(tiles[0])) : -1,
         first_button != nullptr ? static_cast<int>(lv_obj_get_height(tiles[0])) : -1,
         static_cast<int>(lv_obj_get_x(tiles[0])), static_cast<int>(lv_obj_get_y(tiles[0])),
-        first_button != nullptr ? static_cast<int>(lv_obj_get_width(first_button)) : -1,
-        first_button != nullptr ? static_cast<int>(lv_obj_get_height(first_button)) : -1);
+        static_cast<int>(btn_w), static_cast<int>(btn_h));
+
+    // Fail loudly rather than boot into an invisible deck: a degenerate
+    // layout here means geometry was computed before the display existed
+    // (or a config change broke the layout math). abort() makes the reset
+    // reason show up in the next boot log and on the splash screen.
+    if (tv_w <= 0 || tv_h <= 0 || btn_w <= 0 || btn_h <= 0) {
+        dbg::log("UI DEGENERATE: tileview %dx%d btn %dx%d — display registered after build()?",
+                 static_cast<int>(tv_w), static_cast<int>(tv_h), static_cast<int>(btn_w),
+                 static_cast<int>(btn_h));
+        std::abort();
+    }
 
     lv_obj_invalidate(screen);
     lv_timer_create(first_refresh_timer, 200, nullptr);

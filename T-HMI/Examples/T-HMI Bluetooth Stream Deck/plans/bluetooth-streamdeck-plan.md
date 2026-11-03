@@ -49,7 +49,10 @@ touch → LVGL (loop task) ─ tap → hid_task (core 0) → BleHIDManager → h
   draft cached `CONTENT_HEIGHT` as a namespace-scope constant, which resolved
   to -64 px before boot: every button collapsed to nothing (invisible UI) and
   scrolling the dead tileview panicked the device. Do not hoist any
-  `LV_*_RES` math out of `build()`.
+  `LV_*_RES` math out of `build()`. As a guard, `build()` now resolves the
+  tileview layout explicitly before adding tiles and aborts with a loud
+  `[BOOT] UI DEGENERATE` log if any resolved tile/button size is non-positive
+  (the reset reason surfaces on the next splash).
 - **Tileview over gestures**: native scroll-snap gives animated page slides
   and correctly suppresses button clicks once a drag turns into a scroll.
   Buttons act on `LV_EVENT_CLICKED` (fires on release without scrolling).

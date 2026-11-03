@@ -27,12 +27,10 @@ This is the wireless sibling of the [T-HMI USB Stream Deck](../T-HMI%20USB%20Str
 same config-driven page table and theme, but the buttons go over Bluetooth and
 the small screen is split into swipeable pages.
 
-> **Hardware status: not yet tested.** This project compiles cleanly (firmware
-> and configuration tests), but it has **not yet been verified on a physical
-> LilyGo T-HMI display**. If you flash it and something does not work as
-> described, please capture the boot log first (see
-> [Troubleshooting](#troubleshooting)) — the `[BOOT]` lines name the exact
-> init step and the reset reason.
+> **Hardware status: tested and working.** Verified on a physical LilyGo
+> T-HMI display: the swipeable multi-page UI renders correctly, and the deck
+> pairs with Windows over Bluetooth LE and sends its configured actions as a
+> HID keyboard.
 
 ## What You Need
 
